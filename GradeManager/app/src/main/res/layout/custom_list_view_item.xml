@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvfirst"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="0dp"
+        android:layout_weight=".6"
+        android:text="1. Semester"
+        android:textSize="@dimen/text_size_list_view_item"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:gravity="center_vertical"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"/>
+    <TextView
+        android:id="@+id/tvsecond"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="0dp"
+        android:layout_weight=".2"
+        android:text="1.0x"
+        android:textSize="@dimen/text_size_list_view_item"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:gravity="center_vertical"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        />
+    <TextView
+        android:id="@+id/tvthird"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="0dp"
+        android:layout_weight=".2"
+        android:text="6.0"
+        android:textSize="@dimen/text_size_list_view_item"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:gravity="center_vertical"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        />
+</LinearLayout>

@@ -12,9 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Animation;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ch.bbcag.blugij.grademanager.R;
+import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
 import ch.bbcag.blugij.grademanager.sqlite.model.Note;
@@ -26,6 +31,8 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     private FloatingActionButton addButton,noteAddButton,fachAddButton, semesterAddButton;
     private Animation fab_open,fab_close,rotate_forward,rotate_backward;
     private static final String TAG = "SemesterActivity";
+    private ListView semesterListView;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +40,16 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_semester);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        databaseHelper = new DatabaseHelper(this);
 
         addButton = (FloatingActionButton)findViewById(R.id.add_button);
         noteAddButton = (FloatingActionButton)findViewById(R.id.note_add_button);
         fachAddButton = (FloatingActionButton)findViewById(R.id.fach_add_button);
         semesterAddButton = (FloatingActionButton)findViewById(R.id.semester_add_button);
+
+        semesterListView = (ListView) findViewById(R.id.semester_list_view);
+        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters());
+        semesterListView.setAdapter(adapter);
 
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
