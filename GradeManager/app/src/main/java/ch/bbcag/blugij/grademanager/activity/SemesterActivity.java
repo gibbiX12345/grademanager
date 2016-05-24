@@ -103,9 +103,13 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.note_add_button:
+                Intent intentNote = new Intent(this, EditNoteActivity.class);
+                startActivity(intentNote);
                 break;
 
             case R.id.fach_add_button:
+                Intent intentFach = new Intent(this, EditFachActivity.class);
+                startActivity(intentFach);
                 break;
 
             case R.id.semester_add_button:

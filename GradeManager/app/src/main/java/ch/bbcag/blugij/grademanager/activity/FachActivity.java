@@ -85,9 +85,13 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.note_add_button:
+                Intent intentNote = new Intent(this, EditNoteActivity.class);
+                startActivity(intentNote);
                 break;
 
             case R.id.fach_add_button:
+                Intent intentFach = new Intent(this, EditFachActivity.class);
+                startActivity(intentFach);
                 break;
         }
     }

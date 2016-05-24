@@ -9,7 +9,33 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ch.bbcag.blugij.grademanager.activity.EditFachActivity"
+    tools:context=".activity.FachActivity"
     tools:showIn="@layout/activity_edit_fach">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_semester_et_bezeichnung"
+        android:visibility="visible"
+        android:text="@string/new_semester_title"
+        android:layout_marginTop="@dimen/margin_first_input_in_activity"
+        android:textSize="@dimen/text_size_lable_default"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_semester_et_bezeichnung_input"
+        android:visibility="visible"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_input_default"
+        android:shadowColor="@color/black"
+        android:hint=""
+        android:layout_marginTop="@dimen/margin_second_input_in_activity"/>
+
+
 
 </RelativeLayout>

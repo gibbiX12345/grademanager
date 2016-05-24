@@ -47,11 +47,15 @@
         <activity
             android:name=".activity.EditFachActivity"
             android:label="@string/title_activity_edit_fach"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.SemesterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.EditNoteActivity"
             android:label="@string/title_activity_edit_note"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.SemesterActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

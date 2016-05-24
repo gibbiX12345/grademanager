@@ -73,6 +73,8 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.note_add_button:
+                Intent intentNote = new Intent(this, EditNoteActivity.class);
+                startActivity(intentNote);
                 break;
         }
     }
