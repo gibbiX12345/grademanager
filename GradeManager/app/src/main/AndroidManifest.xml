@@ -33,7 +33,7 @@
             android:label="@string/title_activity_edit_semester"
             android:launchMode="singleInstance"
             android:parentActivityName=".activity.SemesterActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.NoteActivity"
             android:label="@string/title_activity_note"
@@ -44,6 +44,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.bbcag.blugij.grademanager.activity.FachActivity" />
         </activity>
+        <activity
+            android:name=".activity.EditFachActivity"
+            android:label="@string/title_activity_edit_fach"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
