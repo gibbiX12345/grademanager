@@ -44,10 +44,7 @@ public class EditNoteActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Spinner spinner = (Spinner) findViewById(R.id.edit_note_spinner);
-        //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
-        //arrayAdapter.addAll(databaseHelper.getAllSemesters());
-        List<Semester> allSemester = databaseHelper.getAllSemesters();
-        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item_one_column, allSemester, true);
+        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item_one_column, databaseHelper.getAllSemesters(), true);
         spinner.setAdapter(adapter);
     }
 }
