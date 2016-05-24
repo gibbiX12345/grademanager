@@ -18,6 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.FachActivity"
+            android:label="@string/title_activity_fach"
+            android:parentActivityName=".activity.SemesterActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ch.bbcag.blugij.grademanager.activity.SemesterActivity" />
+        </activity>
     </application>
 
 </manifest>

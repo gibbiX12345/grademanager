@@ -1,66 +1,47 @@
 package ch.bbcag.blugij.grademanager.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.view.animation.Animation;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import java.util.List;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.adapter.FachAdapter;
 import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
-import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
-import ch.bbcag.blugij.grademanager.sqlite.model.Note;
-import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
-public class SemesterActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class FachActivity extends AppCompatActivity implements View.OnClickListener {
     private Boolean isFabOpen = false;
-    private FloatingActionButton addButton,noteAddButton,fachAddButton, semesterAddButton;
+    private FloatingActionButton addButton,noteAddButton,fachAddButton;
     private Animation fab_open,fab_close,rotate_forward,rotate_backward;
     private static final String TAG = "SemesterActivity";
-    private ListView semesterListView;
+    private ListView fachListView;
     private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_semester);
+        setContentView(R.layout.activity_fach);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         databaseHelper = new DatabaseHelper(this);
 
         addButton = (FloatingActionButton)findViewById(R.id.add_button);
         noteAddButton = (FloatingActionButton)findViewById(R.id.note_add_button);
         fachAddButton = (FloatingActionButton)findViewById(R.id.fach_add_button);
-        semesterAddButton = (FloatingActionButton)findViewById(R.id.semester_add_button);
 
-        semesterListView = (ListView) findViewById(R.id.semester_list_view);
-        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters());
-        semesterListView.setAdapter(adapter);
-        semesterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Semester semester = (Semester) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getApplicationContext(), FachActivity.class);
-                startActivity(intent);
-            }
-        });
+        fachListView = (ListView) findViewById(R.id.fach_list_view);
+        FachAdapter adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachs());
+        fachListView.setAdapter(adapter);
 
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
@@ -70,23 +51,6 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         addButton.setOnClickListener(this);
         noteAddButton.setOnClickListener(this);
         fachAddButton.setOnClickListener(this);
-        semesterAddButton.setOnClickListener(this);
-
-        /* test data
-        DatabaseHelper db = new DatabaseHelper(this);
-
-        Semester semester = new Semester("1. Semester", 0.0);
-        int semesterId = db.createSemester(semester);
-
-        Fach fach = new Fach("Math", 0.0, 2.0, semesterId);
-        int fachId = db.createFach(fach);
-
-        Note note = new Note("1. Test", 6.0, 1.0, semesterId, fachId, "war gut", 1464082396);
-        int noteId = db.createNote(note);
-
-        Log.i(TAG, "SemesterId" + semesterId);
-        Log.i(TAG, "FachId" + fachId);
-        Log.i(TAG, "NoteId" + noteId);*/
     }
 
     @Override
@@ -102,9 +66,6 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.fach_add_button:
                 break;
-
-            case R.id.semester_add_button:
-                break;
         }
     }
 
@@ -116,11 +77,9 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
 
             noteAddButton.startAnimation(fab_close);
             fachAddButton.startAnimation(fab_close);
-            semesterAddButton.startAnimation(fab_close);
 
             noteAddButton.setClickable(false);
             fachAddButton.setClickable(false);
-            semesterAddButton.setClickable(false);
 
             isFabOpen = false;
 
@@ -130,11 +89,9 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
 
             noteAddButton.startAnimation(fab_open);
             fachAddButton.startAnimation(fab_open);
-            semesterAddButton.startAnimation(fab_open);
 
             noteAddButton.setClickable(true);
             fachAddButton.setClickable(true);
-            semesterAddButton.setClickable(true);
 
             isFabOpen = true;
         }
