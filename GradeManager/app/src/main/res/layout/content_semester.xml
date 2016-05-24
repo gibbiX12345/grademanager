@@ -12,4 +12,6 @@
     tools:context=".activity.SemesterActivity"
     tools:showIn="@layout/activity_semester">
 
+
+
 </RelativeLayout>
