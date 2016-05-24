@@ -3,4 +3,6 @@
     <string name="title_activity_semester">GradeManager</string>
     <string name="search_button">search</string>
     <string name="settings_button">Settings</string>
+    <string name="title_activity_edit_semester">New Semester</string>
+    <string name="new_semester_title">Semestername</string>
 </resources>

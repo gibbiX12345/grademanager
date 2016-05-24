@@ -1,5 +1,6 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -47,10 +48,6 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         fachAddButton = (FloatingActionButton)findViewById(R.id.fach_add_button);
         semesterAddButton = (FloatingActionButton)findViewById(R.id.semester_add_button);
 
-        semesterListView = (ListView) findViewById(R.id.semester_list_view);
-        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters());
-        semesterListView.setAdapter(adapter);
-
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_forward);
@@ -79,6 +76,14 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        semesterListView = (ListView) findViewById(R.id.semester_list_view);
+        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters());
+        semesterListView.setAdapter(adapter);
+    }
+
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
@@ -93,6 +98,8 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.semester_add_button:
+                Intent intent = new Intent(this, EditSemesterActivity.class);
+                startActivity(intent);
                 break;
         }
     }
