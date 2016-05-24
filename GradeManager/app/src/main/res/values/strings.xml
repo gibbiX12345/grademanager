@@ -1,12 +1,45 @@
 <resources>
     <string name="app_name">GradeManager</string>
-    <string name="title_activity_semester">GradeManager</string>
+
+    <!-- Text for Toolbar-Icons -->
     <string name="search_button">search</string>
     <string name="settings_button">Settings</string>
-    <string name="title_activity_fach">FachActivity</string>
-    <string name="title_activity_edit_semester">New Semester</string>
+
+
+
+    <!-- Text in "activity_note"  -->
     <string name="title_activity_note">NoteActivity</string>
+
+
+    <!-- Text in "activity_fach"  -->
+    <string name="title_activity_fach">Lesson</string>
+
+    <!-- Text in "activity_semester"  -->
+    <string name="title_activity_semester">GradeManager</string>
+
+
+    <!-- Text in "activity_note"  -->
+    <!-- Text in "activity_fach"  -->
+    <!-- Text in "activity_semester"  -->
+
+
+
+
+    <!-- Text in "content_edit_note"  -->
+    <string name="title_activity_edit_note">New Grade</string>
+
+
+    <!-- Text in "content_edit_fach"  -->
+    <string name="title_activity_edit_fach">New Lession</string>
+
+
+    <!-- Text in "content_edit_semester"  -->
+    <string name="title_activity_edit_semester">New Semester</string>
+
+
+    <!-- Text in "content_note"  -->
+    <!-- Text in "content_fach"  -->
+    <!-- Text in "content_semester"  -->
     <string name="new_semester_title">Bezeichnung:</string>
-    <string name="title_activity_edit_fach">EditFachActivity</string>
-    <string name="title_activity_edit_note">EditNoteActivity</string>
+
 </resources>
