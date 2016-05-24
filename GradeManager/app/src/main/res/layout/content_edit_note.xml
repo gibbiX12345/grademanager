@@ -35,4 +35,9 @@
         android:shadowColor="@color/black"
         android:hint=""
         android:layout_marginTop="@dimen/margin_second_input_in_activity"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_note_spinner"/>
 </RelativeLayout>

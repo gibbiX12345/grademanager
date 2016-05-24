@@ -16,6 +16,7 @@ import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
  * Created by blugij on 24.05.2016.
  */
 public class FachAdapter extends ArrayAdapter<Fach> {
+    boolean isEditMask = false;
     public FachAdapter(Context context, int resource) {
         super(context, resource);
     }
@@ -32,8 +33,9 @@ public class FachAdapter extends ArrayAdapter<Fach> {
         super(context, resource, textViewResourceId, objects);
     }
 
-    public FachAdapter(Context context, int resource, List<Fach> objects) {
+    public FachAdapter(Context context, int resource, List<Fach> objects, boolean isEditMask) {
         super(context, resource, objects);
+        this.isEditMask = isEditMask;
     }
 
     public FachAdapter(Context context, int resource, int textViewResourceId, List<Fach> objects) {
@@ -44,17 +46,28 @@ public class FachAdapter extends ArrayAdapter<Fach> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Fach fach = getItem(position);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item, parent, false);
+        if (isEditMask){
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item_one_column, parent, false);
+            }
+
+            TextView tvFirst = (TextView) convertView.findViewById(R.id.tveditfirst);
+
+            tvFirst.setText(fach.getBezeichnung());
+        } else {
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item, parent, false);
+            }
+
+            TextView tvFirst = (TextView) convertView.findViewById(R.id.tvfirst);
+            TextView tvSecond = (TextView) convertView.findViewById(R.id.tvsecond);
+            TextView tvThird = (TextView) convertView.findViewById(R.id.tvthird);
+
+            tvFirst.setText(fach.getBezeichnung());
+            tvSecond.setText(fach.getGewichtung() + "x");
+            tvThird.setText(fach.getDurchschnitt() + "");
         }
 
-        TextView tvFirst = (TextView) convertView.findViewById(R.id.tvfirst);
-        TextView tvSecond = (TextView) convertView.findViewById(R.id.tvsecond);
-        TextView tvThird = (TextView) convertView.findViewById(R.id.tvthird);
-
-        tvFirst.setText(fach.getBezeichnung());
-        tvSecond.setText(fach.getGewichtung() + "x");
-        tvThird.setText(fach.getDurchschnitt() + "");
         return convertView;
     }
 }

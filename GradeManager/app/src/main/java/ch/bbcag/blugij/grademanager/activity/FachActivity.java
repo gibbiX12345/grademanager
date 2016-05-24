@@ -63,7 +63,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         fachListView = (ListView) findViewById(R.id.fach_list_view);
-        FachAdapter adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachsBySemester(semesterId));
+        FachAdapter adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachsBySemester(semesterId), false);
         fachListView.setAdapter(adapter);
         fachListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -16,6 +16,7 @@ import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
  * Created by blugij on 24.05.2016.
  */
 public class SemesterAdapter extends ArrayAdapter<Semester> {
+    boolean isEditMask = false;
     public SemesterAdapter(Context context, int resource) {
         super(context, resource);
     }
@@ -32,8 +33,9 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
         super(context, resource, textViewResourceId, objects);
     }
 
-    public SemesterAdapter(Context context, int resource, List<Semester> objects) {
+    public SemesterAdapter(Context context, int resource, List<Semester> objects, boolean isEditMask) {
         super(context, resource, objects);
+        this.isEditMask = isEditMask;
     }
 
     public SemesterAdapter(Context context, int resource, int textViewResourceId, List<Semester> objects) {
@@ -44,17 +46,44 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Semester semester = getItem(position);
 
-        if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item, parent, false);
+        if (isEditMask){
+            if(convertView == null){
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item_one_column, parent, false);
+            }
+
+            TextView tvFirst = (TextView) convertView.findViewById(R.id.tveditfirst);
+
+            tvFirst.setText(semester.getBezeichnung());
+        } else {
+            if(convertView == null){
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item, parent, false);
+            }
+
+            TextView tvFirst = (TextView) convertView.findViewById(R.id.tvfirst);
+            TextView tvSecond = (TextView) convertView.findViewById(R.id.tvsecond);
+            TextView tvThird = (TextView) convertView.findViewById(R.id.tvthird);
+
+            tvFirst.setText(semester.getBezeichnung());
+            tvSecond.setText("");
+            tvThird.setText(semester.getDurchschnitt() + "");
         }
 
-        TextView tvFirst = (TextView) convertView.findViewById(R.id.tvfirst);
-        TextView tvSecond = (TextView) convertView.findViewById(R.id.tvsecond);
-        TextView tvThird = (TextView) convertView.findViewById(R.id.tvthird);
+        return convertView;
+    }
 
-        tvFirst.setText(semester.getBezeichnung());
-        tvSecond.setText("");
-        tvThird.setText(semester.getDurchschnitt() + "");
+
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        Semester semester = getItem(position);
+
+        if(convertView == null){
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item_one_column, parent, false);
+        }
+
+        TextView tv = (TextView) convertView;
+
+        tv.setText(semester.getBezeichnung());
+
         return convertView;
     }
 }

@@ -60,7 +60,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         noteListView = (ListView) findViewById(R.id.note_list_view);
-        NoteAdapter adapter = new NoteAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllNotesByFach(semesterId));
+        NoteAdapter adapter = new NoteAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllNotesByFach(semesterId), false);
         noteListView.setAdapter(adapter);
     }
 

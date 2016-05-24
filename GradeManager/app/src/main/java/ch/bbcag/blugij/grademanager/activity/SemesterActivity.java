@@ -81,7 +81,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     protected void onResume() {
         super.onResume();
         semesterListView = (ListView) findViewById(R.id.semester_list_view);
-        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters());
+        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters(), false);
         semesterListView.setAdapter(adapter);
         semesterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
