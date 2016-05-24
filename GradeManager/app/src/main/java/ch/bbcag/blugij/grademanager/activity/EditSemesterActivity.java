@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import ch.bbcag.blugij.grademanager.R;
+import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
+import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
 public class EditSemesterActivity extends AppCompatActivity {
 
@@ -25,8 +28,11 @@ public class EditSemesterActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                EditText editText = (EditText) findViewById(R.id.edit_semester_et_bezeichnung_input);
+                Semester semester = new Semester(editText.getText().toString(), 0.0);
+                DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+                databaseHelper.createSemester(semester);
+                finish();
             }
         });
 
