@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ch.bbcag.blugij.grademanager.activity.EditNoteActivity"
+    tools:showIn="@layout/activity_edit_note">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_note_et_bezeichnung"
+        android:visibility="visible"
+        android:text="@string/new_semester_title"
+        android:layout_marginTop="@dimen/margin_first_input_in_activity"
+        android:textSize="@dimen/text_size_lable_default"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_note_et_bezeichnung_input"
+        android:visibility="visible"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_input_default"
+        android:shadowColor="@color/black"
+        android:hint=""
+        android:layout_marginTop="@dimen/margin_second_input_in_activity"/>
+</RelativeLayout>
