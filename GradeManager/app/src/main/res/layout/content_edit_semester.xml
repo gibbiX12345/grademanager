@@ -13,13 +13,24 @@
     tools:showIn="@layout/activity_edit_semester">
 
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_semester_et_bezeichnung"
         android:visibility="visible"
+        android:text="@string/new_semester_title"
+        android:layout_marginTop="@dimen/margin_first_input_in_activity"
+        android:textSize="@dimen/text_size_default"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_semester_et_bezeichnung_input"
+        android:visibility="visible"
         android:inputType="text"
-        android:hint="@string/new_semester_title"/>
+        android:hint=""
+        android:layout_marginTop="@dimen/margin_second_input_in_activity"/>
 
 
 

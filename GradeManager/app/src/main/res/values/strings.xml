@@ -5,6 +5,7 @@
     <string name="settings_button">Settings</string>
     <string name="title_activity_fach">FachActivity</string>
     <string name="title_activity_edit_semester">New Semester</string>
-    <string name="new_semester_title">Semestername</string>
     <string name="title_activity_note">NoteActivity</string>
+    <string name="new_semester_title">Bezeichnung:</string>
+>>>>>>> origin/master
 </resources>
