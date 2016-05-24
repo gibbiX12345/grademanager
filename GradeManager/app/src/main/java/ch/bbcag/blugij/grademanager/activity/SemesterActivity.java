@@ -50,18 +50,6 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         fachAddButton = (FloatingActionButton)findViewById(R.id.fach_add_button);
         semesterAddButton = (FloatingActionButton)findViewById(R.id.semester_add_button);
 
-        semesterListView = (ListView) findViewById(R.id.semester_list_view);
-        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters());
-        semesterListView.setAdapter(adapter);
-        semesterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Semester semester = (Semester) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getApplicationContext(), FachActivity.class);
-                startActivity(intent);
-            }
-        });
-
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_forward);
@@ -90,6 +78,22 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        semesterListView = (ListView) findViewById(R.id.semester_list_view);
+        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters());
+        semesterListView.setAdapter(adapter);
+        semesterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Semester semester = (Semester) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(), FachActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
@@ -104,6 +108,8 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.semester_add_button:
+                Intent intent = new Intent(this, EditSemesterActivity.class);
+                startActivity(intent);
                 break;
         }
     }

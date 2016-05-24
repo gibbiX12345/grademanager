@@ -28,6 +28,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.bbcag.blugij.grademanager.activity.SemesterActivity" />
         </activity>
+        <activity
+            android:name=".activity.EditSemesterActivity"
+            android:label="@string/title_activity_edit_semester"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.SemesterActivity"
+            android:launchMode="singleInstance">
+        </activity>
     </application>
 
 </manifest>
