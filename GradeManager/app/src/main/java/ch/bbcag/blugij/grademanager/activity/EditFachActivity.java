@@ -1,15 +1,21 @@
 package ch.bbcag.blugij.grademanager.activity;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Spinner;
 
 import ch.bbcag.blugij.grademanager.R;
+import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
+import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 
 public class EditFachActivity extends AppCompatActivity {
+
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,8 @@ public class EditFachActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        databaseHelper = new DatabaseHelper(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -32,5 +40,8 @@ public class EditFachActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Spinner spinner = (Spinner) findViewById(R.id.edit_lesson_spinner);
+        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item_one_column, databaseHelper.getAllSemesters(), true);
+        spinner.setAdapter(adapter);
     }
 }

@@ -31,6 +31,7 @@
 
     <!-- Text in "content_edit_fach"  -->
     <string name="title_activity_edit_fach">New Lession</string>
+    <string name="new_fach_title">Fach</string>
 
 
     <!-- Text in "content_edit_semester"  -->
