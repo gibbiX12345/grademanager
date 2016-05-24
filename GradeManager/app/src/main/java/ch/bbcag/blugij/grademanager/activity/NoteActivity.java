@@ -3,6 +3,7 @@ package ch.bbcag.blugij.grademanager.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,26 +17,24 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import ch.bbcag.blugij.grademanager.R;
-import ch.bbcag.blugij.grademanager.adapter.FachAdapter;
 import ch.bbcag.blugij.grademanager.adapter.NoteAdapter;
-import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
-import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
+import ch.bbcag.blugij.grademanager.sqlite.model.Note;
 
-public class FachActivity extends AppCompatActivity implements View.OnClickListener {
+public class NoteActivity extends AppCompatActivity implements View.OnClickListener {
     private Boolean isFabOpen = false;
-    private FloatingActionButton addButton,noteAddButton,fachAddButton;
+    private FloatingActionButton addButton,noteAddButton;
     private Animation fab_open,fab_close,rotate_forward,rotate_backward;
-    private static final String TAG = "FachActivity";
-    private ListView fachListView;
+    private static final String TAG = "NoteActivity";
+    private ListView noteListView;
     private DatabaseHelper databaseHelper;
-    public static final String INTENT_EXTRA_SEMESTER_ID = "ch.bbcag.blugij.grademanager.INTENT_EXTRA_SEMESTER_ID";
+    public static final String INTENT_EXTRA_FACH_ID = "ch.bbcag.blugij.grademanager.INTENT_EXTRA_FACH_ID";
     private int semesterId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fach);
+        setContentView(R.layout.activity_note);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -43,10 +42,9 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
 
         addButton = (FloatingActionButton)findViewById(R.id.add_button);
         noteAddButton = (FloatingActionButton)findViewById(R.id.note_add_button);
-        fachAddButton = (FloatingActionButton)findViewById(R.id.fach_add_button);
 
         Intent intent = getIntent();
-        semesterId = intent.getIntExtra(INTENT_EXTRA_SEMESTER_ID, 0);
+        semesterId = intent.getIntExtra(INTENT_EXTRA_FACH_ID, 0);
 
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
@@ -55,25 +53,15 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
 
         addButton.setOnClickListener(this);
         noteAddButton.setOnClickListener(this);
-        fachAddButton.setOnClickListener(this);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        fachListView = (ListView) findViewById(R.id.fach_list_view);
-        FachAdapter adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachsBySemester(semesterId));
-        fachListView.setAdapter(adapter);
-        fachListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fach fach = (Fach) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getApplicationContext(), NoteActivity.class);
-                intent.putExtra(NoteActivity.INTENT_EXTRA_FACH_ID, fach.getId());
-                startActivity(intent);
-            }
-        });
+        noteListView = (ListView) findViewById(R.id.note_list_view);
+        NoteAdapter adapter = new NoteAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllNotesByFach(semesterId));
+        noteListView.setAdapter(adapter);
     }
 
     @Override
@@ -86,9 +74,6 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.note_add_button:
                 break;
-
-            case R.id.fach_add_button:
-                break;
         }
     }
 
@@ -97,24 +82,16 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         if(isFabOpen){
 
             addButton.startAnimation(rotate_backward);
-
             noteAddButton.startAnimation(fab_close);
-            fachAddButton.startAnimation(fab_close);
-
             noteAddButton.setClickable(false);
-            fachAddButton.setClickable(false);
 
             isFabOpen = false;
 
         } else {
 
             addButton.startAnimation(rotate_forward);
-
             noteAddButton.startAnimation(fab_open);
-            fachAddButton.startAnimation(fab_open);
-
             noteAddButton.setClickable(true);
-            fachAddButton.setClickable(true);
 
             isFabOpen = true;
         }
@@ -141,6 +118,4 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 }

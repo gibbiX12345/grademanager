@@ -21,9 +21,9 @@
         <activity
             android:name=".activity.FachActivity"
             android:label="@string/title_activity_fach"
+            android:launchMode="singleInstance"
             android:parentActivityName=".activity.SemesterActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleInstance">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.bbcag.blugij.grademanager.activity.SemesterActivity" />
@@ -31,9 +31,18 @@
         <activity
             android:name=".activity.EditSemesterActivity"
             android:label="@string/title_activity_edit_semester"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance"
             android:parentActivityName=".activity.SemesterActivity"
-            android:launchMode="singleInstance">
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.NoteActivity"
+            android:label="@string/title_activity_note"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.FachActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ch.bbcag.blugij.grademanager.activity.FachActivity" />
         </activity>
     </application>
 

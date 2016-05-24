@@ -235,6 +235,29 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return fachList;
     }
 
+    public List<Fach> getAllFachsBySemester(int semesterId){
+        List<Fach> fachList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_FACH + " WHERE " + KEY_F_SEMESTER_ID + " = " + semesterId;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()){
+            do {
+                Fach fach = new Fach();
+                fach.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+                fach.setBezeichnung(c.getString(c.getColumnIndex(KEY_F_BEZEICHNUNG)));
+                fach.setDurchschnitt(c.getDouble(c.getColumnIndex(KEY_F_DURCHSCHNITT)));
+                fach.setGewichtung(c.getDouble(c.getColumnIndex(KEY_F_GEWICHTUNG)));
+                fach.setSemesterId(c.getInt(c.getColumnIndex(KEY_F_SEMESTER_ID)));
+                fachList.add(fach);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return fachList;
+    }
+
     public Fach getUniqueFach(int fachId){
         String selectQuery = "SELECT * FROM " + TABLE_FACH + " WHERE "
                 + KEY_ID + " = " + fachId;
@@ -311,6 +334,32 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public List<Note> getAllNotes(){
         List<Note> fachList = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_NOTE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()){
+            do {
+                Note note = new Note();
+                note.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+                note.setBezeichnung(c.getString(c.getColumnIndex(KEY_N_BEZEICHNUNG)));
+                note.setNote(c.getDouble(c.getColumnIndex(KEY_N_NOTE)));
+                note.setGewichtung(c.getDouble(c.getColumnIndex(KEY_N_GEWICHTUNG)));
+                note.setSemesterId(c.getInt(c.getColumnIndex(KEY_N_SEMESTER_ID)));
+                note.setFachId(c.getInt(c.getColumnIndex(KEY_N_FACH_ID)));
+                note.setBemerkung(c.getString(c.getColumnIndex(KEY_N_BEMERKUNG)));
+                note.setGeschriebenAm(c.getLong(c.getColumnIndex(KEY_N_GESCHRIEBEN_AM)));
+                fachList.add(note);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return fachList;
+    }
+
+    public List<Note> getAllNotesByFach(int fachId){
+        List<Note> fachList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_NOTE + " WHERE " + KEY_N_FACH_ID + " = " + fachId;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);

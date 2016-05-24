@@ -88,6 +88,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Semester semester = (Semester) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), FachActivity.class);
+                intent.putExtra(FachActivity.INTENT_EXTRA_SEMESTER_ID, semester.getId());
                 startActivity(intent);
             }
         });
