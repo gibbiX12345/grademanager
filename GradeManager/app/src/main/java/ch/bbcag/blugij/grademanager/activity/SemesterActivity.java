@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,12 +15,17 @@ import android.view.animation.Animation;
 import android.widget.Toast;
 
 import ch.bbcag.blugij.grademanager.R;
+import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
+import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
+import ch.bbcag.blugij.grademanager.sqlite.model.Note;
+import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
 public class SemesterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Boolean isFabOpen = false;
     private FloatingActionButton addButton,noteAddButton,fachAddButton, semesterAddButton;
     private Animation fab_open,fab_close,rotate_forward,rotate_backward;
+    private static final String TAG = "SemesterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,22 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         noteAddButton.setOnClickListener(this);
         fachAddButton.setOnClickListener(this);
         semesterAddButton.setOnClickListener(this);
+
+        /* test data
+        DatabaseHelper db = new DatabaseHelper(this);
+
+        Semester semester = new Semester("1. Semester", 0.0);
+        int semesterId = db.createSemester(semester);
+
+        Fach fach = new Fach("Math", 0.0, 2.0, semesterId);
+        int fachId = db.createFach(fach);
+
+        Note note = new Note("1. Test", 6.0, 1.0, semesterId, fachId, "war gut", 1464082396);
+        int noteId = db.createNote(note);
+
+        Log.i(TAG, "SemesterId" + semesterId);
+        Log.i(TAG, "FachId" + fachId);
+        Log.i(TAG, "NoteId" + noteId);*/
     }
 
     @Override
