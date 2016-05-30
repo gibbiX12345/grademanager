@@ -40,6 +40,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     private static final String TAG = "SemesterActivity";
     private ListView semesterListView;
     private DatabaseHelper databaseHelper;
+    private SemesterAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +95,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         editor.apply();
 
         semesterListView = (ListView) findViewById(R.id.semester_list_view);
-        SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters(), false);
+        adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters(), false);
         semesterListView.setAdapter(adapter);
         semesterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -131,7 +132,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.item_delete:
-                
+                adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
                 return true;
             case R.id.item_modify:
 
