@@ -5,17 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import java.util.List;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
+import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
 /**
  * Created by blugij on 24.05.2016.
  */
-public class FachAdapter extends ArrayAdapter<Fach> {
+public class FachAdapter extends ArrayAdapter<Fach> implements SpinnerAdapter {
     boolean isEditMask = false;
     public FachAdapter(Context context, int resource) {
         super(context, resource);
@@ -67,6 +69,23 @@ public class FachAdapter extends ArrayAdapter<Fach> {
             tvSecond.setText(fach.getGewichtung() + "x");
             tvThird.setText(fach.getDurchschnitt() + "");
         }
+
+        return convertView;
+    }
+
+
+
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        Fach semester = getItem(position);
+
+        if(convertView == null){
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item_one_column, parent, false);
+        }
+
+        TextView tv = (TextView) convertView;
+
+        tv.setText(semester.getBezeichnung());
 
         return convertView;
     }
