@@ -154,9 +154,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
 
                 return true;
             case R.id.item_modify:
-                Intent intent = new Intent(this, EditSemesterActivity.class);
-                intent.putExtra(EditSemesterActivity.INTENT_EXTRA_SEMESTER_ID, adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId());
-                startActivity(intent);
+
                 return true;
             default:
 
@@ -230,14 +228,36 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.search:
                 Toast.makeText(this, "hallo suche", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.settings:
                 Toast.makeText(this, "hallo settings", Toast.LENGTH_LONG).show();
+                return true;
+
+            case R.id.delete_all:
+                @// TODO: 30.05.2016 Absturz verhindern 
+                new AlertDialog.Builder(this)
+                        .setTitle(getResources().getString(R.string.message_delete_title))
+                        .setMessage(getResources().getString(R.string.message_delete_text))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                int item_id = adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
+                                databaseHelper.deleteSemester(item_id);
+                                onResume();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                onResume();
+                            }
+                        })
+                        .show();
+
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

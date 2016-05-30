@@ -5,6 +5,7 @@
     <!-- Text for Toolbar-Icons -->
     <string name="search_button">Suchen</string>
     <string name="settings_button">Einstellungen</string>
+    <string name="delete_all_button">Alle Daten löschen</string>
 
 
 
