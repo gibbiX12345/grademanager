@@ -92,11 +92,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //region Semester Table methods
 
     public int createSemester(Semester semester){
-        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_S_BEZEICHNUNG, semester.getBezeichnung());
-        values.put(KEY_S_DURCHSCHNITT, semester.getDurchschnitt());
+        values.put(KEY_S_DURCHSCHNITT, semester.getDurchschnitt(this));
+
+        SQLiteDatabase db = this.getWritableDatabase();
 
         long semesterId = db.insert(TABLE_SEMESTER, null, values);
 
@@ -106,11 +107,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public int updateSemester(Semester semester){
-        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_S_BEZEICHNUNG, semester.getBezeichnung());
-        values.put(KEY_S_DURCHSCHNITT, semester.getDurchschnitt());
+        values.put(KEY_S_DURCHSCHNITT, semester.getDurchschnitt(this));
+
+        SQLiteDatabase db = this.getWritableDatabase();
 
         int affectedRows = db.update(TABLE_SEMESTER, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(semester.getId())});
@@ -169,18 +171,36 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    public double calculateSemesterAverage(Semester semester){
+        List<Fach> fachList = getAllFachsBySemester(semester.getId());
+        double gewichtungCount = 0;
+        double sumFach = 0;
+        for(Fach fach : fachList){
+            fach.setDurchschnitt(calculateFachAverage(fach));
+            if (fach.getDurchschnitt(this) != 0) {
+                sumFach += fach.getGewichtung() * fach.getDurchschnitt(this);
+                gewichtungCount += fach.getGewichtung();
+            }
+        }
+        if (sumFach == 0){
+            return sumFach;
+        }
+        return Math.round((sumFach / gewichtungCount) * 10) / 10.0;
+    }
+
     //endregion
 
     //region Fach Table methods
 
     public int createFach(Fach fach){
-        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_F_BEZEICHNUNG, fach.getBezeichnung());
-        values.put(KEY_F_DURCHSCHNITT, fach.getDurchschnitt());
+        values.put(KEY_F_DURCHSCHNITT, fach.getDurchschnitt(this));
         values.put(KEY_F_GEWICHTUNG, fach.getGewichtung());
         values.put(KEY_F_SEMESTER_ID, fach.getSemesterId());
+
+        SQLiteDatabase db = this.getWritableDatabase();
 
         long fachId = db.insert(TABLE_FACH, null, values);
 
@@ -190,13 +210,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public int updateFach(Fach fach){
-        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_F_BEZEICHNUNG, fach.getBezeichnung());
-        values.put(KEY_F_DURCHSCHNITT, fach.getDurchschnitt());
+        values.put(KEY_F_DURCHSCHNITT, fach.getDurchschnitt(this));
         values.put(KEY_F_GEWICHTUNG, fach.getGewichtung());
         values.put(KEY_F_SEMESTER_ID, fach.getSemesterId());
+
+        SQLiteDatabase db = this.getWritableDatabase();
 
         int affectedRows = db.update(TABLE_FACH, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(fach.getId())});
@@ -280,6 +301,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         } else {
             return null;
         }
+    }
+
+    public double calculateFachAverage(Fach fach){
+        List<Note> noteList = getAllNotesByFach(fach.getId());
+        double gewichtungCount = 0;
+        double sumNote = 0;
+        for(Note note : noteList){
+            sumNote += note.getGewichtung() * note.getNote();
+            gewichtungCount += note.getGewichtung();
+        }
+        if (sumNote == 0){
+            return sumNote;
+        }
+        return Math.round((sumNote / gewichtungCount) * 10) / 10.0;
     }
 
     //endregion

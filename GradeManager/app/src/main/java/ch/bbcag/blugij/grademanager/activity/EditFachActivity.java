@@ -50,8 +50,7 @@ public class EditFachActivity extends AppCompatActivity {
                     if (bezeichnung.equals("") || weight == 0) {
                         throw new Exception();
                     } else {
-                        Fach fach = new Fach(editText.getText().toString(), 0.0, 0.0, semester.getId());
-                        databaseHelper = new DatabaseHelper(getApplicationContext());
+                        Fach fach = new Fach(editText.getText().toString(), 0.0, weight, semester.getId());
                         databaseHelper.createFach(fach);
                         finish();
                     }

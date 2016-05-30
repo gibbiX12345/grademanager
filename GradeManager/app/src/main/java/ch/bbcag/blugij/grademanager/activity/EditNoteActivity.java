@@ -83,7 +83,9 @@ public class EditNoteActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 semester = (Semester) parent.getItemAtPosition(position);
-                fachSpinner.setAdapter(new FachAdapter(getApplicationContext(), R.layout.custom_list_view_item_one_column, databaseHelper.getAllFachsBySemester(semester.getId()), true));
+                if (fachSpinner.getSelectedItemPosition() < 0) {
+                    fachSpinner.setAdapter(new FachAdapter(getApplicationContext(), R.layout.custom_list_view_item_one_column, databaseHelper.getAllFachsBySemester(semester.getId()), true));
+                }
             }
 
             @Override
@@ -108,6 +110,7 @@ public class EditNoteActivity extends AppCompatActivity {
                         for (position = 0; position < fachAdapter.getCount(); position++) {
                             if ((fachAdapter.getItem(position)).getId() == fachId) {
                                 fachSpinner.setSelection(position);
+                                fach = fachAdapter.getItem(position);
                                 return;
                             }
                         }

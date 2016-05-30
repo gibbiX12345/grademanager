@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ch.bbcag.blugij.grademanager.R;
+import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
 /**
@@ -63,9 +64,11 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
             TextView tvSecond = (TextView) convertView.findViewById(R.id.tvsecond);
             TextView tvThird = (TextView) convertView.findViewById(R.id.tvthird);
 
+            DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+
             tvFirst.setText(semester.getBezeichnung());
             tvSecond.setText("");
-            tvThird.setText(semester.getDurchschnitt() + "");
+            tvThird.setText(semester.getDurchschnitt(databaseHelper) + "");
         }
 
         return convertView;

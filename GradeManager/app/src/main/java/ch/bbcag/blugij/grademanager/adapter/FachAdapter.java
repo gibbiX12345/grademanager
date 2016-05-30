@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ch.bbcag.blugij.grademanager.R;
+import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
 import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
@@ -61,13 +62,15 @@ public class FachAdapter extends ArrayAdapter<Fach> implements SpinnerAdapter {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item, parent, false);
             }
 
+            DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+
             TextView tvFirst = (TextView) convertView.findViewById(R.id.tvfirst);
             TextView tvSecond = (TextView) convertView.findViewById(R.id.tvsecond);
             TextView tvThird = (TextView) convertView.findViewById(R.id.tvthird);
 
             tvFirst.setText(fach.getBezeichnung());
             tvSecond.setText(fach.getGewichtung() + "x");
-            tvThird.setText(fach.getDurchschnitt() + "");
+            tvThird.setText(fach.getDurchschnitt(databaseHelper) + "");
         }
 
         return convertView;

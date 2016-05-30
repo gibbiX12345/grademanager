@@ -1,5 +1,7 @@
 package ch.bbcag.blugij.grademanager.sqlite.model;
 
+import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
+
 /**
  * Created by blugij on 24.05.2016.
  */
@@ -35,8 +37,8 @@ public class Fach {
         this.fBezeichnung = fBezeichnung;
     }
 
-    public double getDurchschnitt() {
-        return fDurchschnitt;
+    public double getDurchschnitt(DatabaseHelper dbHelper) {
+        return dbHelper.calculateFachAverage(this);
     }
 
     public void setDurchschnitt(double fDurchschnitt) {
