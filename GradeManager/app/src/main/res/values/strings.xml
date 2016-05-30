@@ -17,6 +17,8 @@
 
     <!-- Text in "activity_semester"  -->
     <string name="title_activity_semester">GradeManager</string>
+    <string name="message_delete_title">Element löschen</string>
+    <string name="message_delete_text">Möchtest du diesen Eintrag wirklich löschen?</string>
 
 
     <!-- Text in "activity_note"  -->

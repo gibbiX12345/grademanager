@@ -1,7 +1,9 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -127,12 +129,29 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(final MenuItem item) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.item_delete:
-                adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
+                new AlertDialog.Builder(this)
+                        .setTitle(getResources().getString(R.string.message_delete_title))
+                        .setMessage(getResources().getString(R.string.message_delete_text))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                int item_id = adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
+                                databaseHelper.deleteSemester(item_id);
+                                onResume();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                onResume();
+                            }
+                        })
+                        .show();
+
+
                 return true;
             case R.id.item_modify:
 
