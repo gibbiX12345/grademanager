@@ -37,16 +37,24 @@ public class EditFachActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    EditText editText = (EditText) findViewById(R.id.edit_fach_et_bezeichnung_input);
+                    String bezeichnung = editText.getText().toString();
 
-                EditText editText = (EditText) findViewById(R.id.edit_fach_et_bezeichnung_input);
+                    EditText etInputWeight = (EditText) findViewById(R.id.edit_lesson_weight_input);
+                    double weight = Double.parseDouble(etInputWeight.getText().toString());
 
-                if (!editText.getText().toString().equals("")){
-                    Fach fach = new Fach(editText.getText().toString(), 0.0, 0.0, semester.getId());
-                    databaseHelper = new DatabaseHelper(getApplicationContext());
-                    databaseHelper.createFach(fach);
-                    finish();
-                }else {
-                    Snackbar.make(view, "Pleas fill in all fields!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                    if (bezeichnung.equals("") || weight == 0) {
+                        throw new Exception();
+                    } else {
+                        Fach fach = new Fach(editText.getText().toString(), 0.0, 0.0, semester.getId());
+                        databaseHelper = new DatabaseHelper(getApplicationContext());
+                        databaseHelper.createFach(fach);
+                        finish();
+                    }
+                }catch (Exception e){
+                    Snackbar.make(view, getResources().getString(R.string.message_fill_all_fields), Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
 
 

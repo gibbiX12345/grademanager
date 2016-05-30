@@ -1,19 +1,18 @@
 <resources>
     <string name="app_name">GradeManager</string>
-    <string name="message_fill_all_fields">Pleas fill in all fields!</string>
+    <string name="message_fill_all_fields">Bitte alle Felder einfüllen!</string>
 
     <!-- Text for Toolbar-Icons -->
-    <string name="search_button">search</string>
-    <string name="settings_button">Settings</string>
+    <string name="settings_button">Einstellungen</string>
 
 
 
     <!-- Text in "activity_note"  -->
-    <string name="title_activity_note">NoteActivity</string>
+    <string name="title_activity_note">Note</string>
 
 
     <!-- Text in "activity_fach"  -->
-    <string name="title_activity_fach">Lesson</string>
+    <string name="title_activity_fach">Fach</string>
 
     <!-- Text in "activity_semester"  -->
     <string name="title_activity_semester">GradeManager</string>
@@ -27,12 +26,13 @@
 
 
     <!-- Text in "content_edit_note"  -->
-    <string name="title_activity_edit_note">New Grade</string>
+    <string name="title_activity_edit_note">Neue Note</string>
 
 
     <!-- Text in "content_edit_fach"  -->
-    <string name="title_activity_edit_fach">New Lession</string>
-    <string name="new_fach_title">Fach</string>
+    <string name="title_activity_edit_fach">Neues Fach</string>
+    <string name="new_fach_gewichtung">Gewichtung:</string>
+    <string name="new_fach_semester">Semester:</string>
 
 
     <!-- Text in "content_edit_semester"  -->
@@ -44,6 +44,8 @@
     <string name="label_fach">Fach:</string>
     <string name="label_weight">Gewichtung:</string>
     <string name="label_note">Note:</string>
+
+
     <!-- Text in "content_fach"  -->
 
 
