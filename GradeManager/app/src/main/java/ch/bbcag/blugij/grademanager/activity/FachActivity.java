@@ -1,12 +1,15 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +37,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
     public static final String INTENT_EXTRA_SEMESTER_ID = "ch.bbcag.blugij.grademanager.INTENT_EXTRA_SEMESTER_ID";
     private int semesterId;
     private SharedPreferences sharedPreferences;
+    private FachAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +78,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         editor.apply();
 
         fachListView = (ListView) findViewById(R.id.fach_list_view);
-        FachAdapter adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachsBySemester(semesterId), false);
+        adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachsBySemester(semesterId), false);
         fachListView.setAdapter(adapter);
         fachListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -91,6 +95,52 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
+
+        registerForContextMenu(fachListView);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(final MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.item_delete:
+                new AlertDialog.Builder(this)
+                        .setTitle(getResources().getString(R.string.message_delete_title))
+                        .setMessage(getResources().getString(R.string.message_delete_text))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                int item_id = adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
+                                databaseHelper.deleteFach(item_id);
+                                onResume();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                onResume();
+                            }
+                        })
+                        .show();
+
+
+                return true;
+            case R.id.item_modify:
+                Intent intent = new Intent(this, EditFachActivity.class);
+                intent.putExtra(EditFachActivity.INTENT_EXTRA_FACH_ID, adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId());
+                startActivity(intent);
+                return true;
+            default:
+
+                return super.onContextItemSelected(item);
+        }
+
     }
 
     @Override

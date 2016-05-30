@@ -31,6 +31,9 @@ public class EditNoteActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
     private Semester semester;
     private Fach fach;
+    public static final String INTENT_EXTRA_NOTE_ID = "edit_note_note_id";
+    private boolean isEdit = false;
+    private Note editNote;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,11 +114,9 @@ public class EditNoteActivity extends AppCompatActivity {
                             if ((fachAdapter.getItem(position)).getId() == fachId) {
                                 fachSpinner.setSelection(position);
                                 fach = fachAdapter.getItem(position);
-                                return;
                             }
                         }
                     }
-                    return;
                 }
             }
         }
@@ -130,6 +131,26 @@ public class EditNoteActivity extends AppCompatActivity {
                 fach = null;
             }
         });
+
+
+        if (isEdit){
+            EditText etBezeichnung = (EditText) findViewById(R.id.edit_note_et_bezeichnung_input);
+            etBezeichnung.setText(editNote.getBezeichnung());
+            EditText etGewichtung = (EditText) findViewById(R.id.edit_note_weight_input);
+            etGewichtung.setText(editNote.getGewichtung() + "");
+            EditText etNote = (EditText) findViewById(R.id.edit_note_note_input);
+            etNote.setText(editNote.getNote() + "");
+            DatePicker dpGeschriebenAm = (DatePicker) findViewById(R.id.edit_note_datepicker_datepicker);
+            setLongToDatePicker(dpGeschriebenAm, editNote.getGeschriebenAm());
+            EditText etBemerkung = (EditText) findViewById(R.id.edit_note_bemerkung_input);
+            etBemerkung.setText(editNote.getBemerkung());
+
+            for (int position = 0; position < semesterAdapter.getCount(); position++) {
+                if ((semesterAdapter.getItem(position)).getId() == editNote.getSemesterId()) {
+                    spinner.setSelection(position);
+                }
+            }
+        }
     }
 
     public static long getLongFromDatePicker(DatePicker datePicker){
@@ -141,5 +162,11 @@ public class EditNoteActivity extends AppCompatActivity {
         calendar.set(year, month, day);
 
         return calendar.getTimeInMillis();
+    }
+
+    public static void setLongToDatePicker(DatePicker datePicker, long date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(date);
+        datePicker.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 }

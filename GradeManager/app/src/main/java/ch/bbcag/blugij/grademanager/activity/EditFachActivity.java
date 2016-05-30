@@ -1,6 +1,7 @@
 package ch.bbcag.blugij.grademanager.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -24,6 +25,9 @@ public class EditFachActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
     private SemesterAdapter adapter;
     private Semester semester;
+    public static final String INTENT_EXTRA_FACH_ID = "edit_fach_fach_id";
+    private boolean isEdit = false;
+    private Fach editFach;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,15 @@ public class EditFachActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         databaseHelper = new DatabaseHelper(this);
+
+        Intent intent = getIntent();
+        int fachId = intent.getIntExtra(INTENT_EXTRA_FACH_ID, 0);
+        if (fachId > 0){
+            isEdit = true;
+            editFach = databaseHelper.getUniqueFach(fachId);
+        } else {
+            isEdit = false;
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_save_fach);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,8 +63,15 @@ public class EditFachActivity extends AppCompatActivity {
                     if (bezeichnung.equals("") || weight == 0) {
                         throw new Exception();
                     } else {
-                        Fach fach = new Fach(editText.getText().toString(), 0.0, weight, semester.getId());
-                        databaseHelper.createFach(fach);
+                        if (isEdit){
+                            editFach.setBezeichnung(bezeichnung);
+                            editFach.setGewichtung(weight);
+                            editFach.setSemesterId(semester.getId());
+                            databaseHelper.updateFach(editFach);
+                        } else {
+                            Fach fach = new Fach(editText.getText().toString(), 0.0, weight, semester.getId());
+                            databaseHelper.createFach(fach);
+                        }
                         finish();
                     }
                 }catch (Exception e){
@@ -90,7 +110,21 @@ public class EditFachActivity extends AppCompatActivity {
             for (int position = 0; position < adapter.getCount(); position++) {
                 if ((adapter.getItem(position)).getId() == semesterId) {
                     spinner.setSelection(position);
-                    return;
+                }
+            }
+        }
+
+        if (isEdit){
+
+            EditText editText = (EditText) findViewById(R.id.edit_fach_et_bezeichnung_input);
+            editText.setText(editFach.getBezeichnung());
+
+            EditText etInputWeight = (EditText) findViewById(R.id.edit_lesson_weight_input);
+            etInputWeight.setText(editFach.getGewichtung() + "");
+
+            for (int position = 0; position < adapter.getCount(); position++) {
+                if ((adapter.getItem(position)).getId() == editFach.getSemesterId()) {
+                    spinner.setSelection(position);
                 }
             }
         }
