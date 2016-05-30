@@ -12,9 +12,12 @@ import android.widget.EditText;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
+import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
 import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
 public class EditSemesterActivity extends AppCompatActivity {
+
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +31,24 @@ public class EditSemesterActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText editText = (EditText) findViewById(R.id.edit_semester_et_bezeichnung_input);
-                Semester semester = new Semester(editText.getText().toString(), 0.0);
-                DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
-                databaseHelper.createSemester(semester);
-                finish();
+                try {
+                    EditText editText = (EditText) findViewById(R.id.edit_semester_et_bezeichnung_input);
+                    String bezeichnung = editText.getText().toString();
+
+                    EditText etInputSemester = (EditText) findViewById(R.id.edit_semester_et_bezeichnung_input);
+
+
+                    if (bezeichnung.equals("")) {
+                        throw new Exception();
+                    } else {
+                        Semester semester = new Semester(etInputSemester.getText().toString(), 0.0);
+                        databaseHelper = new DatabaseHelper(getApplicationContext());
+                        databaseHelper.createSemester(semester);
+                        finish();
+                    }
+                }catch (Exception e){
+                    Snackbar.make(view, getResources().getString(R.string.message_fill_all_fields), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }
             }
         });
 

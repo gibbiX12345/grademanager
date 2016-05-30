@@ -48,24 +48,57 @@
         android:layout_marginTop="@dimen/small_margin"
         />
 
-    <EditText
+    <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@id/edit_fach_et_weight"
+        android:id="@+id/weight_fach_input">
+
+    <EditText
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_lesson_weight_input"
         android:visibility="visible"
+        android:layout_weight="0.70"
         android:inputType="text"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_input_default"
         android:shadowColor="@color/black"
         android:hint=""
-        android:layout_below="@+id/edit_fach_et_weight"/>
+
+        />
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_fach_tv_multiplication"
+        android:visibility="visible"
+        android:layout_weight="0.30"
+        android:text="@string/new_fach_mulitplication"
+        android:textSize="@dimen/text_size_lable_default"
+        android:textColor="@color/black"
+
+        />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_fach_tv_semester"
+        android:visibility="visible"
+        android:text="@string/new_fach_semester"
+        android:textSize="@dimen/text_size_lable_default"
+        android:textColor="@color/black"
+        android:layout_below="@id/weight_fach_input"
+        android:layout_marginTop="@dimen/small_margin"
         />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_lesson_spinner"
-        android:layout_below="@id/edit_lesson_weight_input"
+        android:layout_below="@id/edit_fach_tv_semester"
         />
 
 </RelativeLayout>

@@ -34,10 +34,11 @@
     <string name="title_activity_edit_fach">Neues Fach</string>
     <string name="new_fach_gewichtung">Gewichtung:</string>
     <string name="new_fach_semester">Semester:</string>
+    <string name="new_fach_mulitplication">x</string>
 
 
     <!-- Text in "content_edit_semester"  -->
-    <string name="title_activity_edit_semester">New Semester</string>
+    <string name="title_activity_edit_semester">Neues Semester</string>
 
 
     <!-- Text in "content_note"  -->
