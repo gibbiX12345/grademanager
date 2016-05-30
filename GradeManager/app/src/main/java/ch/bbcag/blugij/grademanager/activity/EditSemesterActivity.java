@@ -1,5 +1,6 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,9 @@ import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 public class EditSemesterActivity extends AppCompatActivity {
 
     private DatabaseHelper databaseHelper;
+    public static final String INTENT_EXTRA_SEMESTER_ID = "edit_semester_semester_id";
+    private boolean isEdit = false;
+    private Semester editSemester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +31,15 @@ public class EditSemesterActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        Intent intent = getIntent();
+        int semesterId = intent.getIntExtra(INTENT_EXTRA_SEMESTER_ID, 0);
+        if (semesterId > 0){
+            isEdit = true;
+            editSemester = databaseHelper.getUniqueSemester(semesterId);
+        } else {
+            isEdit = false;
+        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,15 +48,16 @@ public class EditSemesterActivity extends AppCompatActivity {
                     EditText editText = (EditText) findViewById(R.id.edit_semester_et_bezeichnung_input);
                     String bezeichnung = editText.getText().toString();
 
-                    EditText etInputSemester = (EditText) findViewById(R.id.edit_semester_et_bezeichnung_input);
-
-
                     if (bezeichnung.equals("")) {
                         throw new Exception();
                     } else {
-                        Semester semester = new Semester(etInputSemester.getText().toString(), 0.0);
-                        databaseHelper = new DatabaseHelper(getApplicationContext());
-                        databaseHelper.createSemester(semester);
+                        if (isEdit){
+                            editSemester.setBezeichnung(bezeichnung);
+                            databaseHelper.updateSemester(editSemester);
+                        } else {
+                            Semester semester = new Semester(bezeichnung, 0.0);
+                            databaseHelper.createSemester(semester);
+                        }
                         finish();
                     }
                 }catch (Exception e){
@@ -55,4 +68,13 @@ public class EditSemesterActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isEdit){
+            EditText editText = (EditText) findViewById(R.id.edit_semester_et_bezeichnung_input);
+
+            editText.setText(editSemester.getBezeichnung());
+        }
+    }
 }

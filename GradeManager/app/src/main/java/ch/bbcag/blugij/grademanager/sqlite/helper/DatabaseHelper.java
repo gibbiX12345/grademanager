@@ -122,6 +122,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public void deleteSemester(int semesterId){
+        for(Fach fach : getAllFachsBySemester(semesterId)){
+            deleteFach(fach.getId());
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SEMESTER, KEY_ID + " = ?",
                 new String[]{String.valueOf(semesterId)});
@@ -227,6 +230,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public void deleteFach(int fachId){
+        for(Note note : getAllNotesByFach(fachId)){
+            deleteNote(note.getId());
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_FACH, KEY_ID + " = ?",
                 new String[]{String.valueOf(fachId)});
