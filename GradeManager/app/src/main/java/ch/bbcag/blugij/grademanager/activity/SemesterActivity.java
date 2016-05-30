@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -63,6 +64,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         fachAddButton.setOnClickListener(this);
         semesterAddButton.setOnClickListener(this);
 
+
         /* test data
 
         DatabaseHelper db = new DatabaseHelper(this);
@@ -109,31 +111,61 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(intent);
             }
         });
+
+
+        registerForContextMenu(semesterListView);
+
+
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.item_delete:
+                
+                return true;
+            case R.id.item_modify:
+
+                return true;
+            default:
+
+                return super.onContextItemSelected(item);
+        }
+
     }
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.add_button:
-                animateFAB();
-                break;
+            int id = v.getId();
+            switch (id) {
+                case R.id.add_button:
+                    animateFAB();
+                    break;
 
-            case R.id.note_add_button:
-                Intent intentNote = new Intent(this, EditNoteActivity.class);
-                startActivity(intentNote);
-                break;
+                case R.id.note_add_button:
+                    Intent intentNote = new Intent(this, EditNoteActivity.class);
+                    startActivity(intentNote);
+                    break;
 
-            case R.id.fach_add_button:
-                Intent intentFach = new Intent(this, EditFachActivity.class);
-                startActivity(intentFach);
-                break;
+                case R.id.fach_add_button:
+                    Intent intentFach = new Intent(this, EditFachActivity.class);
+                    startActivity(intentFach);
+                    break;
 
-            case R.id.semester_add_button:
-                Intent intent = new Intent(this, EditSemesterActivity.class);
-                startActivity(intent);
-                break;
-        }
+                case R.id.semester_add_button:
+                    Intent intent = new Intent(this, EditSemesterActivity.class);
+                    startActivity(intent);
+                    break;
+            }
     }
 
     public void animateFAB(){

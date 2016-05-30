@@ -59,4 +59,10 @@
 
     <string name="current_semester_id">CURRENT_SEMESTER_ID</string>
     <string name="current_fach_id">CURRENT_FACH_ID</string>
+
+
+    <!-- Context menu-->
+    <string name="item_delete_text">Löschen</string>
+    <string name="item_modify_text">Bearbeiten</string>
+
 </resources>
