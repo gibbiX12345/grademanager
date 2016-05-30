@@ -3,6 +3,7 @@
     <string name="message_fill_all_fields">Bitte alle Felder einfüllen!</string>
 
     <!-- Text for Toolbar-Icons -->
+    <string name="search_button">Suchen</string>
     <string name="settings_button">Einstellungen</string>
 
 
