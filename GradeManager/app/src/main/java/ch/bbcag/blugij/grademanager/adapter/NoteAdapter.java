@@ -5,9 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.sqlite.model.Note;
@@ -71,10 +75,15 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             TextView tvFirst = (TextView) convertView.findViewById(R.id.tvfirst);
             TextView tvSecond = (TextView) convertView.findViewById(R.id.tvsecond);
             TextView tvThird = (TextView) convertView.findViewById(R.id.tvthird);
+            TextView tvFourth = (TextView) convertView.findViewById(R.id.tvfourth);
+            LinearLayout dateLayout = (LinearLayout) convertView.findViewById(R.id.date_layout);
+            dateLayout.bringToFront();
 
             tvFirst.setText(note.getBezeichnung());
             tvSecond.setText(note.getGewichtung() + "x");
             tvThird.setText(note.getNote() + "");
+            tvFourth.bringToFront();
+            tvFourth.setText(new SimpleDateFormat("dd.MMM.yyyy", Locale.GERMAN).format(new Date(note.getGeschriebenAm())));
         }
         return convertView;
     }

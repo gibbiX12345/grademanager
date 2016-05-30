@@ -43,23 +43,28 @@ public class EditNoteActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText etBezeichnung = (EditText) findViewById(R.id.edit_note_et_bezeichnung_input);
-                String bezeichnung = etBezeichnung.getText().toString();
-                EditText etGewichtung = (EditText) findViewById(R.id.edit_note_weight_input);
-                long gewichtung = Long.parseLong(etGewichtung.getText().toString());
-                EditText etNote = (EditText) findViewById(R.id.edit_note_note_input);
-                long note = Long.parseLong(etNote.getText().toString());
-                DatePicker dpGeschriebenAm = (DatePicker) findViewById(R.id.edit_note_datepicker_datepicker);
-                long geschriebenAm = getLongFromDatePicker(dpGeschriebenAm);
-                EditText etBemerkung = (EditText) findViewById(R.id.edit_note_bemerkung_input);
-                String bemerkung = etBemerkung.getText().toString();
-                if(bezeichnung.equals("") || gewichtung <= 0 || note < 1 || geschriebenAm < 0 || semester == null || fach == null){
-                    
-                } else {
-                    int semesterId = semester.getId();
-                    int fachId = fach.getId();
-                    Note newNote = new Note(bezeichnung, note, gewichtung, semesterId, fachId, bemerkung, geschriebenAm);
-                    databaseHelper.createNote(newNote);
+                try {
+                    EditText etBezeichnung = (EditText) findViewById(R.id.edit_note_et_bezeichnung_input);
+                    String bezeichnung = etBezeichnung.getText().toString();
+                    EditText etGewichtung = (EditText) findViewById(R.id.edit_note_weight_input);
+                    double gewichtung = Double.parseDouble(etGewichtung.getText().toString());
+                    EditText etNote = (EditText) findViewById(R.id.edit_note_note_input);
+                    double note = Double.parseDouble(etNote.getText().toString());
+                    DatePicker dpGeschriebenAm = (DatePicker) findViewById(R.id.edit_note_datepicker_datepicker);
+                    long geschriebenAm = getLongFromDatePicker(dpGeschriebenAm);
+                    EditText etBemerkung = (EditText) findViewById(R.id.edit_note_bemerkung_input);
+                    String bemerkung = etBemerkung.getText().toString();
+                    if(bezeichnung.equals("") || gewichtung <= 0 || note < 1 || geschriebenAm < 0 || semester == null || fach == null){
+                        throw new Exception();
+                    } else {
+                        int semesterId = semester.getId();
+                        int fachId = fach.getId();
+                        Note newNote = new Note(bezeichnung, note, gewichtung, semesterId, fachId, bemerkung, geschriebenAm);
+                        databaseHelper.createNote(newNote);
+                        finish();
+                    }
+                } catch (Exception e){
+                    Snackbar.make(view, getResources().getString(R.string.message_fill_all_fields), Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
             }
         });
