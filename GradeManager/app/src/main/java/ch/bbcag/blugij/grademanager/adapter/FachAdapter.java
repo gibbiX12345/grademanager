@@ -77,7 +77,7 @@ public class FachAdapter extends ArrayAdapter<Fach> implements SpinnerAdapter {
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        Fach semester = getItem(position);
+        Fach fach = getItem(position);
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_view_item_one_column, parent, false);
@@ -85,7 +85,8 @@ public class FachAdapter extends ArrayAdapter<Fach> implements SpinnerAdapter {
 
         TextView tv = (TextView) convertView;
 
-        tv.setText(semester.getBezeichnung());
+        tv.setText(fach.getBezeichnung());
+        tv.setTextColor(getContext().getResources().getColor(R.color.black));
 
         return convertView;
     }
