@@ -1,5 +1,7 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
@@ -82,7 +84,17 @@ public class EditFachActivity extends AppCompatActivity {
                 semester = null;
             }
         });
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+        int semesterId = sharedPreferences.getInt(getString(R.string.current_semester_id), 0);
 
+        if (semesterId != 0) {
+            for (int position = 0; position < adapter.getCount(); position++) {
+                if ((adapter.getItem(position)).getId() == semesterId) {
+                    spinner.setSelection(position);
+                    return;
+                }
+            }
+        }
 
     }
 }

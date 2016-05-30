@@ -1,6 +1,9 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -82,6 +85,12 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(getString(R.string.current_semester_id), 0);
+        editor.apply();
+
         semesterListView = (ListView) findViewById(R.id.semester_list_view);
         SemesterAdapter adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters(), false);
         semesterListView.setAdapter(adapter);
@@ -89,6 +98,12 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Semester semester = (Semester) parent.getItemAtPosition(position);
+
+                SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt(getString(R.string.current_semester_id), semester.getId());
+                editor.apply();
+
                 Intent intent = new Intent(getApplicationContext(), FachActivity.class);
                 intent.putExtra(FachActivity.INTENT_EXTRA_SEMESTER_ID, semester.getId());
                 startActivity(intent);

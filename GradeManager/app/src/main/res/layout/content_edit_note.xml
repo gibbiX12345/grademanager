@@ -122,7 +122,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/edit_note_semester_spinner"
         android:layout_below="@id/edit_note_semester"
-        android:layout_marginLeft="-50px"
+        android:layout_marginLeft="-15dp"
         android:layout_marginRight="20px"/>
 
     <TextView
@@ -142,7 +142,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/edit_note_fach_spinner"
         android:layout_below="@id/edit_note_fach"
-        android:layout_marginLeft="-50px"
+        android:layout_marginLeft="-15dp"
         android:layout_marginRight="20px" />
 
     <TextView

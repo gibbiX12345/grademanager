@@ -1,6 +1,8 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseHelper databaseHelper;
     public static final String INTENT_EXTRA_SEMESTER_ID = "ch.bbcag.blugij.grademanager.INTENT_EXTRA_SEMESTER_ID";
     private int semesterId;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,9 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         databaseHelper = new DatabaseHelper(this);
+        sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+
+        setTitle(databaseHelper.getUniqueSemester(sharedPreferences.getInt(getString(R.string.current_semester_id),0)).getBezeichnung());
 
         addButton = (FloatingActionButton)findViewById(R.id.add_button);
         noteAddButton = (FloatingActionButton)findViewById(R.id.note_add_button);
@@ -62,6 +68,11 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(getString(R.string.current_fach_id), 0);
+        editor.apply();
+
         fachListView = (ListView) findViewById(R.id.fach_list_view);
         FachAdapter adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachsBySemester(semesterId), false);
         fachListView.setAdapter(adapter);
@@ -69,6 +80,12 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Fach fach = (Fach) parent.getItemAtPosition(position);
+
+                SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt(getString(R.string.current_fach_id), fach.getId());
+                editor.apply();
+
                 Intent intent = new Intent(getApplicationContext(), NoteActivity.class);
                 intent.putExtra(NoteActivity.INTENT_EXTRA_FACH_ID, fach.getId());
                 startActivity(intent);

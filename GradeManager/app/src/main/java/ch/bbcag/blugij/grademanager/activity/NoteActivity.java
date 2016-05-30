@@ -1,6 +1,8 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,6 +32,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseHelper databaseHelper;
     public static final String INTENT_EXTRA_FACH_ID = "ch.bbcag.blugij.grademanager.INTENT_EXTRA_FACH_ID";
     private int semesterId;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         databaseHelper = new DatabaseHelper(this);
+        sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+
+        setTitle(databaseHelper.getUniqueSemester(sharedPreferences.getInt(getString(R.string.current_semester_id),0)).getBezeichnung() + " ➤ " +
+                databaseHelper.getUniqueFach(sharedPreferences.getInt(getString(R.string.current_fach_id),0)).getBezeichnung());
 
         addButton = (FloatingActionButton)findViewById(R.id.add_button);
         noteAddButton = (FloatingActionButton)findViewById(R.id.note_add_button);

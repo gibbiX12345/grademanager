@@ -54,4 +54,9 @@
     <!-- Text in "content_semester"  -->
     <string name="new_semester_title">Bezeichnung:</string>
 
+    <!-- SharedPreferences Keys-->
+    <string name="app_package_name">ch.bbcag.blugij.grademanager</string>
+
+    <string name="current_semester_id">CURRENT_SEMESTER_ID</string>
+    <string name="current_fach_id">CURRENT_FACH_ID</string>
 </resources>

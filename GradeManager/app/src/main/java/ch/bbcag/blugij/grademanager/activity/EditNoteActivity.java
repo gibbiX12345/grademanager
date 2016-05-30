@@ -1,5 +1,7 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -75,7 +77,8 @@ public class EditNoteActivity extends AppCompatActivity {
         super.onResume();
         Spinner spinner = (Spinner) findViewById(R.id.edit_note_semester_spinner);
         final Spinner fachSpinner = (Spinner) findViewById(R.id.edit_note_fach_spinner);
-        spinner.setAdapter(new SemesterAdapter(this, R.layout.custom_list_view_item_one_column, databaseHelper.getAllSemesters(), true));
+        SemesterAdapter semesterAdapter = new SemesterAdapter(this, R.layout.custom_list_view_item_one_column, databaseHelper.getAllSemesters(), true);
+        spinner.setAdapter(semesterAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -88,6 +91,31 @@ public class EditNoteActivity extends AppCompatActivity {
                 semester = null;
             }
         });
+
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+        int semesterId = sharedPreferences.getInt(getString(R.string.current_semester_id), 0);
+
+        if (semesterId != 0) {
+            for (int position = 0; position < semesterAdapter.getCount(); position++) {
+                if ((semesterAdapter.getItem(position)).getId() == semesterId) {
+                    spinner.setSelection(position);
+                    FachAdapter fachAdapter = new FachAdapter(getApplicationContext(), R.layout.custom_list_view_item_one_column, databaseHelper.getAllFachsBySemester(semesterId), true);
+                    fachSpinner.setAdapter(fachAdapter);
+
+                    int fachId = sharedPreferences.getInt(getString(R.string.current_fach_id), 0);
+
+                    if (fachId != 0) {
+                        for (position = 0; position < fachAdapter.getCount(); position++) {
+                            if ((fachAdapter.getItem(position)).getId() == fachId) {
+                                fachSpinner.setSelection(position);
+                                return;
+                            }
+                        }
+                    }
+                    return;
+                }
+            }
+        }
         fachSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
