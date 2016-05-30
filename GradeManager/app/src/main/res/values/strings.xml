@@ -39,6 +39,10 @@
 
 
     <!-- Text in "content_note"  -->
+    <string name="label_semester">Semester:</string>
+    <string name="label_fach">Fach:</string>
+    <string name="label_weight">Gewichtung:</string>
+    <string name="label_note">Note:</string>
     <!-- Text in "content_fach"  -->
 
 

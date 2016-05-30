@@ -19,7 +19,7 @@
         android:id="@+id/edit_note_et_bezeichnung"
         android:visibility="visible"
         android:text="@string/new_semester_title"
-        android:layout_marginTop="@dimen/margin_first_input_in_activity"
+        android:layout_marginTop="@dimen/big_margin"
         android:textSize="@dimen/text_size_lable_default"
         android:textColor="@color/black"
         />
@@ -34,10 +34,113 @@
         android:textSize="@dimen/text_size_input_default"
         android:shadowColor="@color/black"
         android:hint=""
-        android:layout_marginTop="@dimen/margin_second_input_in_activity"/>
+        android:layout_below="@id/edit_note_et_bezeichnung"/>
+
+    <LinearLayout
+        android:id="@+id/weight_note_labels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/edit_note_et_bezeichnung_input"
+        android:layout_marginTop="@dimen/small_margin">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:id="@+id/edit_note_weight"
+            android:visibility="visible"
+            android:text="@string/label_weight"
+            android:textSize="@dimen/text_size_lable_default"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:id="@+id/edit_note_note"
+            android:visibility="visible"
+            android:text="@string/label_note"
+            android:textSize="@dimen/text_size_lable_default"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weight_note_inputs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/weight_note_labels">
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".37"
+            android:id="@+id/edit_note_weight_input"
+            android:visibility="visible"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_input_default"
+            android:shadowColor="@color/black"
+            android:layout_marginRight="20px"
+            android:text="1"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".1"
+            android:text="x"
+            android:visibility="visible"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:id="@+id/edit_note_note_input"
+            android:visibility="visible"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_input_default"
+            android:shadowColor="@color/black"
+            android:layout_marginRight="20px"
+            android:hint=""/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_note_semester"
+        android:visibility="visible"
+        android:text="@string/label_semester"
+        android:layout_marginTop="@dimen/small_margin"
+        android:textSize="@dimen/text_size_lable_default"
+        android:textColor="@color/black"
+        android:layout_below="@id/weight_note_inputs"
+        />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_note_spinner"/>
+        android:id="@+id/edit_note_semester_spinner"
+        android:layout_below="@id/edit_note_semester"
+        android:layout_marginLeft="-50px"
+        android:layout_marginRight="20px"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_note_fach"
+        android:visibility="visible"
+        android:text="@string/label_fach"
+        android:layout_marginTop="@dimen/small_margin"
+        android:textSize="@dimen/text_size_lable_default"
+        android:textColor="@color/black"
+        android:layout_below="@id/edit_note_semester_spinner"
+        />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_note_fach_spinner"
+        android:layout_below="@id/edit_note_fach"
+        android:layout_marginLeft="-50px"
+        android:layout_marginRight="20px"/>
+
 </RelativeLayout>

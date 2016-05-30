@@ -8,5 +8,6 @@
     <dimen name="text_size_input_default">60px</dimen>
     <dimen name="margin_first_input_in_activity">150px</dimen>
     <dimen name="margin_second_input_in_activity">250px</dimen>
-    <dimen name="margin_third_input_in_activity">350px</dimen>
+    <dimen name="big_margin">150px</dimen>
+    <dimen name="small_margin">100px </dimen>
 </resources>
