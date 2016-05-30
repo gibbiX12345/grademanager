@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_semester_et_bezeichnung"
+        android:id="@+id/edit_fach_et_bezeichnung"
         android:visibility="visible"
         android:text="@string/new_semester_title"
         android:layout_marginTop="@dimen/margin_first_input_in_activity"
@@ -36,21 +36,12 @@
         android:hint=""
         android:layout_marginTop="@dimen/margin_second_input_in_activity"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_fach_et_bezeichnung"
-        android:visibility="visible"
-        android:text="@string/new_fach_title"
-        android:layout_marginTop="@dimen/margin_first_input_in_activity"
-        android:textSize="@dimen/text_size_lable_default"
-        android:textColor="@color/black"
-        />
-
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_lesson_spinner"
+        android:layout_below="@id/edit_fach_et_bezeichnung_input"
+        android:layout_marginTop="@dimen/margin_third_input_in_activity"
         />
 
 </RelativeLayout>

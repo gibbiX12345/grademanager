@@ -61,6 +61,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         semesterAddButton.setOnClickListener(this);
 
         /* test data
+
         DatabaseHelper db = new DatabaseHelper(this);
 
         Semester semester = new Semester("1. Semester", 0.0);
@@ -74,7 +75,8 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
 
         Log.i(TAG, "SemesterId" + semesterId);
         Log.i(TAG, "FachId" + fachId);
-        Log.i(TAG, "NoteId" + noteId);*/
+        Log.i(TAG, "NoteId" + noteId);
+        */
     }
 
     @Override
