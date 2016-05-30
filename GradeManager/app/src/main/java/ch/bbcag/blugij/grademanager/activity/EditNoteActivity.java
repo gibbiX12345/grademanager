@@ -54,7 +54,7 @@ public class EditNoteActivity extends AppCompatActivity {
                 EditText etBemerkung = (EditText) findViewById(R.id.edit_note_bemerkung_input);
                 String bemerkung = etBemerkung.getText().toString();
                 if(bezeichnung.equals("") || gewichtung <= 0 || note < 1 || geschriebenAm < 0 || semester == null || fach == null){
-                    Snackbar.
+                    
                 } else {
                     int semesterId = semester.getId();
                     int fachId = fach.getId();

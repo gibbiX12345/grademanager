@@ -33,16 +33,23 @@ public class EditFachActivity extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_save_fach);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 EditText editText = (EditText) findViewById(R.id.edit_fach_et_bezeichnung_input);
-                Fach fach = new Fach(editText.getText().toString(), 0.0, 0.0, semester.getId());
-                databaseHelper = new DatabaseHelper(getApplicationContext());
-                databaseHelper.createFach(fach);
-                finish();
+
+                if (!editText.getText().toString().equals("")){
+                    Fach fach = new Fach(editText.getText().toString(), 0.0, 0.0, semester.getId());
+                    databaseHelper = new DatabaseHelper(getApplicationContext());
+                    databaseHelper.createFach(fach);
+                    finish();
+                }else {
+                    Snackbar.make(view, "Pleas fill in all fields!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }
+
+
 
             }
         });
@@ -67,5 +74,7 @@ public class EditFachActivity extends AppCompatActivity {
                 semester = null;
             }
         });
+
+
     }
 }
