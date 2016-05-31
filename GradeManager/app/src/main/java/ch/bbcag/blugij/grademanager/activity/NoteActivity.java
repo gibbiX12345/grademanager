@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -174,14 +175,31 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
         switch (item.getItemId()) {
-            case R.id.search:
-                Toast.makeText(this, "hallo suche", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.settings:
-                Toast.makeText(this, "hallo settings", Toast.LENGTH_LONG).show();
+            case R.id.delete_all:
+                new AlertDialog.Builder(this)
+                        .setTitle(getResources().getString(R.string.message_delete_title))
+                        .setMessage(getResources().getString(R.string.message_delete_all_text))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                                databaseHelper.onUpgrade(db, 0, 0);
+
+                                Intent intent = new Intent(getApplicationContext(), SemesterActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                onResume();
+                            }
+                        })
+                        .show();
+
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
