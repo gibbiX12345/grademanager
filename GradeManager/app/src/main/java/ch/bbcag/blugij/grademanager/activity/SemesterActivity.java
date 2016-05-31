@@ -155,7 +155,9 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
 
                 return true;
             case R.id.item_modify:
-
+                Intent intent = new Intent(this, EditSemesterActivity.class);
+                intent.putExtra(EditSemesterActivity.INTENT_EXTRA_SEMESTER_ID, adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId());
+                startActivity(intent);
                 return true;
             default:
 
