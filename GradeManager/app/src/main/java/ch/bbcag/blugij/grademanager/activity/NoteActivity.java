@@ -71,7 +71,6 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         noteAddButton.setOnLongClickListener(this);
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();

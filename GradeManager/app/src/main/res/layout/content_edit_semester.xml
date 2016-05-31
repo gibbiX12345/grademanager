@@ -21,7 +21,7 @@
         android:id="@+id/edit_semester_et_bezeichnung"
         android:visibility="visible"
         android:text="@string/new_semester_title"
-        android:layout_marginTop="@dimen/margin_first_input_in_activity"
+        android:layout_marginTop="@dimen/big_margin"
         android:textSize="@dimen/text_size_lable_default"
         android:textColor="@color/black"
         />
@@ -36,7 +36,7 @@
         android:textSize="@dimen/text_size_input_default"
         android:shadowColor="@color/black"
         android:hint=""
-        android:layout_marginTop="@dimen/margin_second_input_in_activity"/>
+        android:layout_below="@id/edit_semester_et_bezeichnung"/>
 
 
 

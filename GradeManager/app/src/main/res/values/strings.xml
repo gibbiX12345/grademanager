@@ -3,49 +3,30 @@
     <string name="message_fill_all_fields">Einige Eingaben sind üngültig!</string>
     <string name="edit_entry">bearbeiten</string>
     <string name="no_elements">Keine Elemente gefunden…</string>
-
     <!-- Text for Toolbar-Icons -->
     <string name="search_button">Suchen</string>
     <string name="settings_button">Einstellungen</string>
     <string name="delete_all_title">Alle Elemente löschen</string>
     <string name="delete_all_button">Alle Daten löschen</string>
     <string name="message_delete_all_text">Möchtest du wirklich alle Elemente löschen?</string>
-
-
     <!-- Text in "activity_note"  -->
     <string name="title_activity_note">Note</string>
-
-
     <!-- Text in "activity_fach"  -->
     <string name="title_activity_fach">Fach</string>
-
     <!-- Text in "activity_semester"  -->
     <string name="title_activity_semester">GradeManager</string>
     <string name="message_delete_title">Element löschen</string>
     <string name="message_delete_text">Möchtest du diesen Eintrag wirklich löschen?</string>
-
-
-    <!-- Text in "activity_note"  -->
-    <!-- Text in "activity_fach"  -->
-    <!-- Text in "activity_semester"  -->
-
-
     <!-- Text in "content_edit_note"  -->
     <string name="title_activity_edit_note">Neue Note</string>
-
-
     <!-- Text in "content_edit_fach"  -->
     <string name="title_activity_edit_fach">Neues Fach</string>
     <string name="title_activity_edit_fach_edit"> bearbeiten</string>
     <string name="new_fach_gewichtung">Gewichtung:</string>
     <string name="new_fach_semester">Semester:</string>
     <string name="new_fach_mulitplication">x</string>
-
-
     <!-- Text in "content_edit_semester"  -->
     <string name="title_activity_edit_semester">Neues Semester</string>
-
-
     <!-- Text in "content_note"  -->
     <string name="label_semester">Semester:</string>
     <string name="label_fach">Fach:</string>
@@ -53,19 +34,12 @@
     <string name="label_note">Note:</string>
     <string name="label_bemerkung">Bemerkung:</string>
     <string name="label_geschrieben_ab">Geschrieben am:</string>
-    <!-- Text in "content_fach"  -->
-
-
     <!-- Text in "content_semester"  -->
     <string name="new_semester_title">Bezeichnung:</string>
-
     <!-- SharedPreferences Keys-->
     <string name="app_package_name">ch.bbcag.blugij.grademanager</string>
-
     <string name="current_semester_id">CURRENT_SEMESTER_ID</string>
     <string name="current_fach_id">CURRENT_FACH_ID</string>
-
-
     <!-- Context menu-->
     <string name="item_delete_text">Löschen</string>
     <string name="item_modify_text">Bearbeiten</string>
