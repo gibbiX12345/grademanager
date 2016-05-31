@@ -4,17 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
-import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
 import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
 public class EditSemesterActivity extends AppCompatActivity {

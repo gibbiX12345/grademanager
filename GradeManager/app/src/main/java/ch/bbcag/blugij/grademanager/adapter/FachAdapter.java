@@ -13,7 +13,6 @@ import java.util.List;
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
-import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
 /**
  * Created by blugij on 24.05.2016.

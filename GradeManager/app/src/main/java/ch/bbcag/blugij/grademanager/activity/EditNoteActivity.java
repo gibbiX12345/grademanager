@@ -12,17 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.Calendar;
-import java.util.List;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.adapter.FachAdapter;
-import ch.bbcag.blugij.grademanager.adapter.NoteAdapter;
 import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Fach;

@@ -6,24 +6,17 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.adapter.FachAdapter;
 import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
-import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
 import ch.bbcag.blugij.grademanager.sqlite.model.Note;
-import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
 public class DisplayNoteActivity extends AppCompatActivity {
     public static final String INTENT_EXTRA_NOTE_ID = "display_note_note_id";
