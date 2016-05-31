@@ -274,7 +274,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         float posY = v.getY();
 
         Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP|Gravity.LEFT, (int) posX - 200, (int) posY - 35);
+        toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL, 0, 0);
 
         switch (id) {
           case R.id.note_add_button:
