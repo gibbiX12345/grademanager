@@ -104,9 +104,11 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
 
         semesterListView = (ListView) findViewById(R.id.semester_list_view);
         adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters(), false);
+        TextView textView = (TextView) findViewById(R.id.no_elements_found);
         if (adapter.isEmpty()){
-            TextView textView = (TextView) findViewById(R.id.no_elements_found);
             textView.setVisibility(View.VISIBLE);
+        } else {
+            textView.setVisibility(View.GONE);
         }
         semesterListView.setAdapter(adapter);
         semesterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
