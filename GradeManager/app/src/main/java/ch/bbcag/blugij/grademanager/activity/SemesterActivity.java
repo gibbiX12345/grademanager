@@ -69,7 +69,6 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         fachAddButton.setOnClickListener(this);
         semesterAddButton.setOnClickListener(this);
 
-        addButton.setOnLongClickListener(this);
         noteAddButton.setOnLongClickListener(this);
         fachAddButton.setOnLongClickListener(this);
         semesterAddButton.setOnLongClickListener(this);

@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +29,7 @@ import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
 
-public class FachActivity extends AppCompatActivity implements View.OnClickListener {
+public class FachActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     private Boolean isFabOpen = false;
     private FloatingActionButton addButton,noteAddButton,fachAddButton;
     private Animation fab_open,fab_close,rotate_forward,rotate_backward;
@@ -67,6 +68,9 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         addButton.setOnClickListener(this);
         noteAddButton.setOnClickListener(this);
         fachAddButton.setOnClickListener(this);
+
+        noteAddButton.setOnLongClickListener(this);
+        fachAddButton.setOnLongClickListener(this);
     }
 
 
@@ -162,6 +166,33 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentFach);
                 break;
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+
+        int id = v.getId();
+        float posX = v.getX();
+        float posY = v.getY();
+
+        Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL, 0, 0);
+
+        switch (id) {
+            case R.id.note_add_button:
+                toast.setText(getResources().getString(R.string.title_activity_edit_note));
+                break;
+
+            case R.id.fach_add_button:
+                toast.setText(getResources().getString(R.string.title_activity_edit_fach));
+                break;
+
+            default:
+                return true;
+        }
+
+        toast.show();
+        return true;
     }
 
     public void animateFAB(){

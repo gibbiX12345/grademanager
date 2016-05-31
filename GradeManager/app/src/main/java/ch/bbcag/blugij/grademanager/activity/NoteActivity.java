@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +28,7 @@ import ch.bbcag.blugij.grademanager.adapter.NoteAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Note;
 
-public class NoteActivity extends AppCompatActivity implements View.OnClickListener {
+public class NoteActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     private Boolean isFabOpen = false;
     private FloatingActionButton addButton,noteAddButton;
     private Animation fab_open,fab_close,rotate_forward,rotate_backward;
@@ -65,6 +66,8 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
         addButton.setOnClickListener(this);
         noteAddButton.setOnClickListener(this);
+
+        noteAddButton.setOnLongClickListener(this);
     }
 
 
@@ -145,6 +148,29 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentNote);
                 break;
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+
+        int id = v.getId();
+        float posX = v.getX();
+        float posY = v.getY();
+
+        Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL, 0, 0);
+
+        switch (id) {
+            case R.id.note_add_button:
+                toast.setText(getResources().getString(R.string.title_activity_edit_note));
+                break;
+
+            default:
+                return true;
+        }
+
+        toast.show();
+        return true;
     }
 
     public void animateFAB(){
