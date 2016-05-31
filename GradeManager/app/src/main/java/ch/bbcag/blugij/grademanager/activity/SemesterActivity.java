@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,7 +36,7 @@ import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
 import ch.bbcag.blugij.grademanager.sqlite.model.Note;
 import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
 
-public class SemesterActivity extends AppCompatActivity implements View.OnClickListener {
+public class SemesterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
     private Boolean isFabOpen = false;
     private FloatingActionButton addButton,noteAddButton,fachAddButton, semesterAddButton;
@@ -68,6 +69,10 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         fachAddButton.setOnClickListener(this);
         semesterAddButton.setOnClickListener(this);
 
+        addButton.setOnLongClickListener(this);
+        noteAddButton.setOnLongClickListener(this);
+        fachAddButton.setOnLongClickListener(this);
+        semesterAddButton.setOnLongClickListener(this);
 
         /* test data
 
@@ -116,10 +121,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-
         registerForContextMenu(semesterListView);
-
-
     }
 
     @Override
@@ -191,6 +193,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             }
     }
 
+
     public void animateFAB(){
 
         if(isFabOpen){
@@ -234,13 +237,6 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(final MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.search:
-                Toast.makeText(this, "hallo suche", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.settings:
-                Toast.makeText(this, "hallo settings", Toast.LENGTH_LONG).show();
-                return true;
-
             case R.id.delete_all:
                 new AlertDialog.Builder(this)
                         .setTitle(getResources().getString(R.string.message_delete_title))
@@ -249,7 +245,10 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                             public void onClick(DialogInterface dialog, int which) {
                                 SQLiteDatabase db = databaseHelper.getWritableDatabase();
                                 databaseHelper.onUpgrade(db, 0, 0);
-                                onResume();
+
+                                Intent intent = new Intent(getApplicationContext(), SemesterActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -267,4 +266,34 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    @Override
+    public boolean onLongClick(View v) {
+
+        int id = v.getId();
+        float posX = v.getX();
+        float posY = v.getY();
+
+        Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP|Gravity.LEFT, (int) posX - 200, (int) posY - 35);
+
+        switch (id) {
+          case R.id.note_add_button:
+                toast.setText(getResources().getString(R.string.title_activity_edit_note));
+                break;
+
+            case R.id.fach_add_button:
+                toast.setText(getResources().getString(R.string.title_activity_edit_fach));
+                break;
+
+            case R.id.semester_add_button:
+                toast.setText(getResources().getString(R.string.title_activity_edit_semester));
+                break;
+
+            default:
+                return true;
+        }
+
+        toast.show();
+        return true;
+    }
 }
