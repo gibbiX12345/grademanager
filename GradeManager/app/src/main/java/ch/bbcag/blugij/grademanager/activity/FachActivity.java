@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -25,10 +26,9 @@ import android.widget.Toast;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.adapter.FachAdapter;
-import ch.bbcag.blugij.grademanager.adapter.NoteAdapter;
-import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
+import ch.bbcag.blugij.grademanager.utils.UIHelper;
 
 public class FachActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     private Boolean isFabOpen = false;
@@ -164,8 +164,12 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.note_add_button:
-                Intent intentNote = new Intent(this, EditNoteActivity.class);
-                startActivity(intentNote);
+                if (databaseHelper.getAllFachs().isEmpty()){
+                    UIHelper.toastFunctionNotAvailable(this);
+                } else {
+                    Intent intentNote = new Intent(this, EditNoteActivity.class);
+                    startActivity(intentNote);
+                }
                 break;
 
             case R.id.fach_add_button:

@@ -1,7 +1,6 @@
 package ch.bbcag.blugij.grademanager.activity;
 
 import android.app.AlertDialog;
-import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.Menu;
@@ -22,20 +20,15 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import ch.bbcag.blugij.grademanager.R;
-import ch.bbcag.blugij.grademanager.adapter.FachAdapter;
 import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
-import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
-import ch.bbcag.blugij.grademanager.sqlite.model.Note;
 import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
+import ch.bbcag.blugij.grademanager.utils.UIHelper;
 
 public class SemesterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
@@ -183,13 +176,21 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                     break;
 
                 case R.id.note_add_button:
-                    Intent intentNote = new Intent(this, EditNoteActivity.class);
-                    startActivity(intentNote);
+                    if (databaseHelper.getAllFachs().isEmpty()){
+                        UIHelper.toastFunctionNotAvailable(this);
+                    } else {
+                        Intent intentNote = new Intent(this, EditNoteActivity.class);
+                        startActivity(intentNote);
+                    }
                     break;
 
                 case R.id.fach_add_button:
-                    Intent intentFach = new Intent(this, EditFachActivity.class);
-                    startActivity(intentFach);
+                    if (databaseHelper.getAllSemesters().isEmpty()){
+                        UIHelper.toastFunctionNotAvailable(this);
+                    } else {
+                        Intent intentFach = new Intent(this, EditFachActivity.class);
+                        startActivity(intentFach);
+                    }
                     break;
 
                 case R.id.semester_add_button:
