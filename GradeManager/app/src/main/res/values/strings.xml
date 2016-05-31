@@ -19,6 +19,8 @@
     <string name="message_delete_text">Möchtest du diesen Eintrag wirklich löschen?</string>
     <!-- Text in "content_edit_note"  -->
     <string name="title_activity_edit_note">Neue Note</string>
+    <string name="alert_title_high_note">Achtung</string>
+    <string name="alert_text_high_note">Die eingegebene Note ist über 6!</string>
     <!-- Text in "content_edit_fach"  -->
     <string name="title_activity_edit_fach">Neues Fach</string>
     <string name="title_activity_edit_fach_edit"> bearbeiten</string>

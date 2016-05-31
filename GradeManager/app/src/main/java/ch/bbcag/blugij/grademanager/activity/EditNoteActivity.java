@@ -1,6 +1,8 @@
 package ch.bbcag.blugij.grademanager.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -74,9 +76,11 @@ public class EditNoteActivity extends AppCompatActivity {
                     if(bezeichnung.equals("") || gewichtung <= 0 || note < 1 || geschriebenAm < 0 || semester == null || fach == null){
                         throw new Exception();
                     } else {
+
+
                         int semesterId = semester.getId();
                         int fachId = fach.getId();
-                        if (isEdit){
+                        if (isEdit) {
                             editNote.setBezeichnung(bezeichnung);
                             editNote.setGewichtung(gewichtung);
                             editNote.setNote(note);
@@ -89,7 +93,21 @@ public class EditNoteActivity extends AppCompatActivity {
                             Note newNote = new Note(bezeichnung, note, gewichtung, semesterId, fachId, bemerkung, geschriebenAm);
                             databaseHelper.createNote(newNote);
                         }
-                        finish();
+                        if(note > 6) {
+                            AlertDialog alertDialog = new AlertDialog.Builder(EditNoteActivity.this).create();
+                            alertDialog.setTitle(getResources().getString(R.string.alert_title_high_note));
+                            alertDialog.setMessage(getResources().getString(R.string.alert_text_high_note));
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            finish();
+                                        }
+                                    });
+                            alertDialog.show();
+                        } else {
+                            finish();
+                        }
                     }
                 } catch (Exception e){
                     Snackbar.make(view, getResources().getString(R.string.message_fill_all_fields), Snackbar.LENGTH_LONG).setAction("Action", null).show();
