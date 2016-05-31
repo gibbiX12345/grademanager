@@ -74,6 +74,8 @@ public class EditFachActivity extends AppCompatActivity {
                             databaseHelper.createFach(fach);
                         }
                         finish();
+                        Intent semesterIntent = new Intent(EditFachActivity.this, SemesterActivity.class);
+                        startActivity(semesterIntent);
                     }
                 }catch (Exception e){
                     Snackbar.make(view, getResources().getString(R.string.message_fill_all_fields), Snackbar.LENGTH_LONG).setAction("Action", null).show();
