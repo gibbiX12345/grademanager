@@ -2,6 +2,7 @@
     <string name="app_name">GradeManager</string>
     <string name="message_fill_all_fields">Einige Eingaben sind üngültig!</string>
     <string name="edit_entry">bearbeiten</string>
+    <string name="no_elements">Keine Elemente gefunden…</string>
 
     <!-- Text for Toolbar-Icons -->
     <string name="search_button">Suchen</string>

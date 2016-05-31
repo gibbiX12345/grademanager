@@ -21,6 +21,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ch.bbcag.blugij.grademanager.R;
@@ -76,6 +77,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         noteListView = (ListView) findViewById(R.id.note_list_view);
         adapter = new NoteAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllNotesByFach(semesterId), false);
+        if (adapter.isEmpty()){
+            TextView textView = (TextView) findViewById(R.id.no_elements_found);
+            textView.setVisibility(View.VISIBLE);
+        }
         noteListView.setAdapter(adapter);
 
         noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

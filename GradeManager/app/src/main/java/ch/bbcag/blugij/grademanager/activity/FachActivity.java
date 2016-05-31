@@ -20,6 +20,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ch.bbcag.blugij.grademanager.R;
@@ -84,6 +85,10 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
 
         fachListView = (ListView) findViewById(R.id.fach_list_view);
         adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachsBySemester(semesterId), false);
+        if (adapter.isEmpty()){
+            TextView textView = (TextView) findViewById(R.id.no_elements_found);
+            textView.setVisibility(View.VISIBLE);
+        }
         fachListView.setAdapter(adapter);
         fachListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

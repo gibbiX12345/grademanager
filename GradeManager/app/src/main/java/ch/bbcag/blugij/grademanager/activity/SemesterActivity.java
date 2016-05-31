@@ -24,6 +24,7 @@ import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -103,6 +104,10 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
 
         semesterListView = (ListView) findViewById(R.id.semester_list_view);
         adapter = new SemesterAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllSemesters(), false);
+        if (adapter.isEmpty()){
+            TextView textView = (TextView) findViewById(R.id.no_elements_found);
+            textView.setVisibility(View.VISIBLE);
+        }
         semesterListView.setAdapter(adapter);
         semesterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
