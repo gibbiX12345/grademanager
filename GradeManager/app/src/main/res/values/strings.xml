@@ -6,6 +6,7 @@
     <string name="search_button">Suchen</string>
     <string name="settings_button">Einstellungen</string>
     <string name="delete_all_button">Alle Daten löschen</string>
+    <string name="message_delete_all_text">Möchtest du wirklich alle Elemente löschen?</string>
 
 
 
