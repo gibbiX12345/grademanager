@@ -50,6 +50,7 @@ public class EditNoteActivity extends AppCompatActivity {
         if (noteId > 0){
             isEdit = true;
             editNote = databaseHelper.getUniqueNote(noteId);
+            setTitle(editNote.getBezeichnung() + " " + getResources().getString(R.string.edit_entry));
         } else {
             isEdit = false;
         }
@@ -75,8 +76,19 @@ public class EditNoteActivity extends AppCompatActivity {
                     } else {
                         int semesterId = semester.getId();
                         int fachId = fach.getId();
-                        Note newNote = new Note(bezeichnung, note, gewichtung, semesterId, fachId, bemerkung, geschriebenAm);
-                        databaseHelper.createNote(newNote);
+                        if (isEdit){
+                            editNote.setBezeichnung(bezeichnung);
+                            editNote.setGewichtung(gewichtung);
+                            editNote.setNote(note);
+                            editNote.setSemesterId(semester.getId());
+                            editNote.setFachId(fach.getId());
+                            editNote.setGeschriebenAm(geschriebenAm);
+                            editNote.setBemerkung(bemerkung);
+                            databaseHelper.updateNote(editNote);
+                        } else {
+                            Note newNote = new Note(bezeichnung, note, gewichtung, semesterId, fachId, bemerkung, geschriebenAm);
+                            databaseHelper.createNote(newNote);
+                        }
                         finish();
                     }
                 } catch (Exception e){
@@ -162,7 +174,7 @@ public class EditNoteActivity extends AppCompatActivity {
                 }
             }
             FachAdapter fachAdapter = (FachAdapter) fachSpinner.getAdapter();
-            for (int position = 0; position < semesterAdapter.getCount(); position++) {
+            for (int position = 0; position < fachAdapter.getCount(); position++) {
                 if ((fachAdapter.getItem(position)).getId() == editNote.getFachId()) {
                     fachSpinner.setSelection(position);
                 }

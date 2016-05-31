@@ -83,7 +83,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             tvSecond.setText(note.getGewichtung() + "x");
             tvThird.setText(note.getNote() + "");
             tvFourth.bringToFront();
-            tvFourth.setText(new SimpleDateFormat("dd.MMM.yyyy", Locale.GERMAN).format(new Date(note.getGeschriebenAm())));
+            tvFourth.setText(new SimpleDateFormat("dd. MMM yyyy", Locale.GERMAN).format(new Date(note.getGeschriebenAm())));
         }
         return convertView;
     }

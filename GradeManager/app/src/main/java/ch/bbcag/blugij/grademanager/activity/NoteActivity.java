@@ -74,6 +74,16 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         adapter = new NoteAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllNotesByFach(semesterId), false);
         noteListView.setAdapter(adapter);
 
+        noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), DisplayNoteActivity.class);
+                Note note = (Note) parent.getItemAtPosition(position);
+                intent.putExtra(DisplayNoteActivity.INTENT_EXTRA_NOTE_ID, note.getId());
+                startActivity(intent);
+            }
+        });
+
         registerForContextMenu(noteListView);
     }
 
@@ -96,7 +106,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 int item_id = adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
-                                databaseHelper.deleteFach(item_id);
+                                databaseHelper.deleteNote(item_id);
                                 onResume();
                             }
                         })

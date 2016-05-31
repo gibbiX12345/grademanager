@@ -44,6 +44,7 @@ public class EditFachActivity extends AppCompatActivity {
         if (fachId > 0){
             isEdit = true;
             editFach = databaseHelper.getUniqueFach(fachId);
+            setTitle(editFach.getBezeichnung() + " " + getResources().getString(R.string.edit_entry));
         } else {
             isEdit = false;
         }

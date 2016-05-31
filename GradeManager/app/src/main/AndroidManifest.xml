@@ -18,7 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.FachActivity"
             android:label="@string/title_activity_fach"
@@ -29,14 +28,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.bbcag.blugij.grademanager.activity.SemesterActivity" />
         </activity>
-
         <activity
             android:name=".activity.EditSemesterActivity"
             android:label="@string/title_activity_edit_semester"
             android:launchMode="singleInstance"
             android:parentActivityName=".activity.SemesterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible"  />
         <activity
             android:name=".activity.NoteActivity"
             android:label="@string/title_activity_note"
@@ -47,20 +45,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.bbcag.blugij.grademanager.activity.FachActivity" />
         </activity>
-
         <activity
             android:name=".activity.EditFachActivity"
             android:label="@string/title_activity_edit_fach"
             android:launchMode="singleInstance"
             android:parentActivityName=".activity.SemesterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".activity.EditNoteActivity"
             android:label="@string/title_activity_edit_note"
             android:launchMode="singleInstance"
             android:parentActivityName=".activity.SemesterActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible"  />
+        <activity
+            android:name=".activity.DisplayNoteActivity"
+            android:label="@string/title_activity_edit_note"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activity.SemesterActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
+
 </manifest>

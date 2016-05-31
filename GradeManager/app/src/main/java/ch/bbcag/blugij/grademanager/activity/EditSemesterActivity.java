@@ -37,6 +37,7 @@ public class EditSemesterActivity extends AppCompatActivity {
         if (semesterId > 0){
             isEdit = true;
             editSemester = databaseHelper.getUniqueSemester(semesterId);
+            setTitle(editSemester.getBezeichnung() + " " + getResources().getString(R.string.edit_entry));
         } else {
             isEdit = false;
         }

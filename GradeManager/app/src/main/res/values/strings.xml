@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">GradeManager</string>
     <string name="message_fill_all_fields">Bitte alle Felder einfüllen!</string>
+    <string name="edit_entry">bearbeiten</string>
 
     <!-- Text for Toolbar-Icons -->
     <string name="search_button">Suchen</string>
     <string name="settings_button">Einstellungen</string>
     <string name="delete_all_button">Alle Daten löschen</string>
     <string name="message_delete_all_text">Möchtest du wirklich alle Elemente löschen?</string>
-
 
 
     <!-- Text in "activity_note"  -->
@@ -28,14 +28,13 @@
     <!-- Text in "activity_semester"  -->
 
 
-
-
     <!-- Text in "content_edit_note"  -->
     <string name="title_activity_edit_note">Neue Note</string>
 
 
     <!-- Text in "content_edit_fach"  -->
     <string name="title_activity_edit_fach">Neues Fach</string>
+    <string name="title_activity_edit_fach_edit"> bearbeiten</string>
     <string name="new_fach_gewichtung">Gewichtung:</string>
     <string name="new_fach_semester">Semester:</string>
     <string name="new_fach_mulitplication">x</string>
