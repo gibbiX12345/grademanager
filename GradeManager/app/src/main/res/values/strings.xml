@@ -5,6 +5,13 @@
     <string name="no_elements">Keine Elemente gefunden…</string>
     <!-- Toast Strings-->
     <string name="toast_text_function_na">Diese Funktion ist nicht verfügbar!</string>
+    <string name="toast_text_note_saved">Die Note wurde gespeichert.</string>
+    <string name="toast_text_fach_saved">Das Fach wurde gespeichert.</string>
+    <string name="toast_text_semester_saved">Das Semester wurde gespeichert.</string>
+    <string name="toast_text_semester_deleted">Das Semester wurde mit sämtlichen Inhalten gelöscht.</string>
+    <string name="toast_text_fach_deleted">Das Fach wurde mit sämtlichen Inhalten gelöscht.</string>
+    <string name="toast_text_note_deleted">Die Note wurde gelöscht.</string>
+    <string name="toast_text_everything_deleted">Sämtliche Daten wurden gelöscht.</string>
     <!-- Text for Toolbar-Icons -->
     <string name="search_button">Suchen</string>
     <string name="settings_button">Einstellungen</string>
@@ -29,8 +36,12 @@
     <string name="new_fach_gewichtung">Gewichtung:</string>
     <string name="new_fach_semester">Semester:</string>
     <string name="new_fach_mulitplication">x</string>
+    <string name="alert_title_same_bez_fach">Achtung</string>
+    <string name="alert_text_same_bez_fach">Dieses Fach ist in diesem Semester bereits vorhanden!</string>
     <!-- Text in "content_edit_semester"  -->
     <string name="title_activity_edit_semester">Neues Semester</string>
+    <string name="alert_title_same_bez">Achtung</string>
+    <string name="alert_text_same_bez">Dieses Semester ist bereits vorhanden!</string>
     <!-- Text in "content_note"  -->
     <string name="label_semester">Semester:</string>
     <string name="label_fach">Fach:</string>

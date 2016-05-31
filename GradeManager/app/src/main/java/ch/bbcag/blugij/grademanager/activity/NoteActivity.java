@@ -27,6 +27,7 @@ import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.adapter.NoteAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Note;
+import ch.bbcag.blugij.grademanager.utils.UIHelper;
 
 public class NoteActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     private Boolean isFabOpen = false;
@@ -116,6 +117,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(DialogInterface dialog, int which) {
                                 int item_id = adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
                                 databaseHelper.deleteNote(item_id);
+                                UIHelper.makeToast(NoteActivity.this, getResources().getString(R.string.toast_text_note_deleted), Toast.LENGTH_LONG);
                                 onResume();
                             }
                         })
@@ -217,6 +219,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(DialogInterface dialog, int which) {
                                 SQLiteDatabase db = databaseHelper.getWritableDatabase();
                                 databaseHelper.onUpgrade(db, 0, 0);
+                                UIHelper.makeToast(NoteActivity.this, getResources().getString(R.string.toast_text_everything_deleted), Toast.LENGTH_LONG);
 
                                 Intent intent = new Intent(getApplicationContext(), SemesterActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);

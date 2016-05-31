@@ -1,6 +1,7 @@
 package ch.bbcag.blugij.grademanager.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,12 +13,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.adapter.SemesterAdapter;
 import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
 import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
+import ch.bbcag.blugij.grademanager.utils.UIHelper;
 
 public class EditFachActivity extends AppCompatActivity {
 
@@ -63,6 +66,13 @@ public class EditFachActivity extends AppCompatActivity {
                     if (bezeichnung.equals("") || weight == 0) {
                         throw new Exception();
                     } else {
+                        boolean hasSame = false;
+                        for(Fach fach : databaseHelper.getAllFachsBySemester(semester.getId())){
+                            if (fach.getBezeichnung().toLowerCase().equals(bezeichnung.toLowerCase())){
+                                hasSame = true;
+                            }
+                        }
+
                         if (isEdit){
                             editFach.setBezeichnung(bezeichnung);
                             editFach.setGewichtung(weight);
@@ -72,16 +82,39 @@ public class EditFachActivity extends AppCompatActivity {
                             Fach fach = new Fach(editText.getText().toString(), 0.0, weight, semester.getId());
                             databaseHelper.createFach(fach);
                         }
-                        finish();
 
-                        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putInt(getString(R.string.current_semester_id), semester.getId());
-                        editor.apply();
+                        if (hasSame) {
+                            UIHelper.showInfoMessage(EditFachActivity.this, getResources().getString(R.string.alert_title_same_bez_fach),
+                                    getResources().getString(R.string.alert_text_same_bez_fach), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            finish();
+                                            UIHelper.makeToast(EditFachActivity.this, getResources().getString(R.string.toast_text_fach_saved), Toast.LENGTH_LONG);
 
-                        Intent fachIntent = new Intent(getApplicationContext(), FachActivity.class);
-                        fachIntent.putExtra(FachActivity.INTENT_EXTRA_SEMESTER_ID, semester.getId());
-                        startActivity(fachIntent);
+                                            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putInt(getString(R.string.current_semester_id), semester.getId());
+                                            editor.apply();
+
+                                            Intent fachIntent = new Intent(getApplicationContext(), FachActivity.class);
+                                            fachIntent.putExtra(FachActivity.INTENT_EXTRA_SEMESTER_ID, semester.getId());
+                                            startActivity(fachIntent);
+                                        }
+                                    });
+                        } else {
+                            finish();
+                            UIHelper.makeToast(EditFachActivity.this, getResources().getString(R.string.toast_text_fach_saved), Toast.LENGTH_LONG);
+
+                            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putInt(getString(R.string.current_semester_id), semester.getId());
+                            editor.apply();
+
+                            Intent fachIntent = new Intent(getApplicationContext(), FachActivity.class);
+                            fachIntent.putExtra(FachActivity.INTENT_EXTRA_SEMESTER_ID, semester.getId());
+                            startActivity(fachIntent);
+                        }
                     }
                 }catch (Exception e){
                     Snackbar.make(view, getResources().getString(R.string.message_fill_all_fields), Snackbar.LENGTH_LONG).setAction("Action", null).show();

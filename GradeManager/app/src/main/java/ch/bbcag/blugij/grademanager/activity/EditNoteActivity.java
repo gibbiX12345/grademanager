@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -25,6 +26,7 @@ import ch.bbcag.blugij.grademanager.sqlite.helper.DatabaseHelper;
 import ch.bbcag.blugij.grademanager.sqlite.model.Fach;
 import ch.bbcag.blugij.grademanager.sqlite.model.Note;
 import ch.bbcag.blugij.grademanager.sqlite.model.Semester;
+import ch.bbcag.blugij.grademanager.utils.UIHelper;
 
 public class EditNoteActivity extends AppCompatActivity {
 
@@ -92,29 +94,28 @@ public class EditNoteActivity extends AppCompatActivity {
                         }
 
                         if(note > 6) {
-                            AlertDialog alertDialog = new AlertDialog.Builder(EditNoteActivity.this).create();
-                            alertDialog.setTitle(getResources().getString(R.string.alert_title_high_note));
-                            alertDialog.setMessage(getResources().getString(R.string.alert_text_high_note));
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            finish();
+                            UIHelper.showInfoMessage(EditNoteActivity.this, getResources().getString(R.string.alert_title_high_note),
+                                    getResources().getString(R.string.alert_text_high_note), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    finish();
+                                    UIHelper.makeToast(EditNoteActivity.this, getResources().getString(R.string.toast_text_note_saved), Toast.LENGTH_LONG);
 
-                                            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                                            editor.putInt(getString(R.string.current_fach_id), fach.getId());
-                                            editor.putInt(getString(R.string.current_semester_id), semester.getId());
-                                            editor.apply();
+                                    SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putInt(getString(R.string.current_fach_id), fach.getId());
+                                    editor.putInt(getString(R.string.current_semester_id), semester.getId());
+                                    editor.apply();
 
-                                            Intent intent = new Intent(EditNoteActivity.this, NoteActivity.class);
-                                            intent.putExtra(NoteActivity.INTENT_EXTRA_FACH_ID, fach.getId());
-                                            startActivity(intent);
-                                        }
-                                    });
-                            alertDialog.show();
+                                    Intent intent = new Intent(EditNoteActivity.this, NoteActivity.class);
+                                    intent.putExtra(NoteActivity.INTENT_EXTRA_FACH_ID, fach.getId());
+                                    startActivity(intent);
+                                }
+                            });
                         } else {
                             finish();
+                            UIHelper.makeToast(EditNoteActivity.this, getResources().getString(R.string.toast_text_note_saved), Toast.LENGTH_LONG);
 
                             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();

@@ -130,6 +130,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(DialogInterface dialog, int which) {
                                 int item_id = adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
                                 databaseHelper.deleteFach(item_id);
+                                UIHelper.makeToast(FachActivity.this, getResources().getString(R.string.toast_text_fach_deleted), Toast.LENGTH_LONG);
                                 onResume();
                             }
                         })
@@ -252,6 +253,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(DialogInterface dialog, int which) {
                                 SQLiteDatabase db = databaseHelper.getWritableDatabase();
                                 databaseHelper.onUpgrade(db, 0, 0);
+                                UIHelper.makeToast(FachActivity.this, getResources().getString(R.string.toast_text_everything_deleted), Toast.LENGTH_LONG);
 
                                 Intent intent = new Intent(getApplicationContext(), SemesterActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
