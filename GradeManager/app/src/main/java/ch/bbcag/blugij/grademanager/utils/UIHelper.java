@@ -11,6 +11,6 @@ import ch.bbcag.blugij.grademanager.R;
 public class UIHelper {
 
     public static void toastFunctionNotAvailable(Context context){
-        Toast.makeText(context, context.getString(R.string.toast_text_function_na), Toast.LENGTH_LONG).show();
+        Toast.makeText(context, context.getString(R.string.toast_text_function_na), Toast.LENGTH_SHORT).show();
     }
 }
