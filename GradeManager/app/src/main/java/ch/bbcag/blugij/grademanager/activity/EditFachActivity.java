@@ -69,7 +69,13 @@ public class EditFachActivity extends AppCompatActivity {
                         boolean hasSame = false;
                         for(Fach fach : databaseHelper.getAllFachsBySemester(semester.getId())){
                             if (fach.getBezeichnung().toLowerCase().equals(bezeichnung.toLowerCase())){
-                                hasSame = true;
+                                if (isEdit){
+                                    if (fach.getId() != editFach.getId()){
+                                        hasSame = true;
+                                    }
+                                } else {
+                                    hasSame = true;
+                                }
                             }
                         }
 

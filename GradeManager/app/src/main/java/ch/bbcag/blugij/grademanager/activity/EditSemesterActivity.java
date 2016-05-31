@@ -56,7 +56,13 @@ public class EditSemesterActivity extends AppCompatActivity {
                         boolean hasSame = false;
                         for(Semester semester : databaseHelper.getAllSemesters()){
                             if (semester.getBezeichnung().toLowerCase().equals(bezeichnung.toLowerCase())){
-                                hasSame = true;
+                                if (isEdit){
+                                    if (semester.getId() != editSemester.getId()){
+                                        hasSame = true;
+                                    }
+                                } else {
+                                    hasSame = true;
+                                }
                             }
                         }
 
