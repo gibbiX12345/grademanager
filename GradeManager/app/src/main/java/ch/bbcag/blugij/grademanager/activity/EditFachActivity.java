@@ -74,8 +74,15 @@ public class EditFachActivity extends AppCompatActivity {
                             databaseHelper.createFach(fach);
                         }
                         finish();
-                        Intent semesterIntent = new Intent(EditFachActivity.this, SemesterActivity.class);
-                        startActivity(semesterIntent);
+
+                        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt(getString(R.string.current_semester_id), semester.getId());
+                        editor.apply();
+
+                        Intent fachIntent = new Intent(getApplicationContext(), FachActivity.class);
+                        fachIntent.putExtra(FachActivity.INTENT_EXTRA_SEMESTER_ID, semester.getId());
+                        startActivity(fachIntent);
                     }
                 }catch (Exception e){
                     Snackbar.make(view, getResources().getString(R.string.message_fill_all_fields), Snackbar.LENGTH_LONG).setAction("Action", null).show();
