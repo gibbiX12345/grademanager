@@ -238,7 +238,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         switch (item.getItemId()) {
             case R.id.delete_all:
                 new AlertDialog.Builder(this)
-                        .setTitle(getResources().getString(R.string.message_delete_title))
+                        .setTitle(getResources().getString(R.string.delete_all_title))
                         .setMessage(getResources().getString(R.string.message_delete_all_text))
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
