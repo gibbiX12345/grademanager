@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/edit_lesson_weight_input"
         android:visibility="visible"
+        android:text="1"
         android:layout_weight="0.70"
         android:inputType="text"
         android:textColor="@color/black"
