@@ -67,24 +67,6 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
         noteAddButton.setOnLongClickListener(this);
         fachAddButton.setOnLongClickListener(this);
         semesterAddButton.setOnLongClickListener(this);
-
-        /* test data
-
-        DatabaseHelper db = new DatabaseHelper(this);
-
-        Semester semester = new Semester("1. Semester", 0.0);
-        int semesterId = db.createSemester(semester);
-
-        Fach fach = new Fach("Math", 0.0, 2.0, semesterId);
-        int fachId = db.createFach(fach);
-
-        Note note = new Note("1. Test", 6.0, 1.0, semesterId, fachId, "war gut", 1464082396);
-        int noteId = db.createNote(note);
-
-        Log.i(TAG, "SemesterId" + semesterId);
-        Log.i(TAG, "FachId" + fachId);
-        Log.i(TAG, "NoteId" + noteId);
-        */
     }
 
     @Override
