@@ -1,6 +1,7 @@
 package ch.bbcag.blugij.grademanager.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -43,6 +44,16 @@ public class EditNoteActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         databaseHelper = new DatabaseHelper(this);
+
+        Intent intent = getIntent();
+        int noteId = intent.getIntExtra(INTENT_EXTRA_NOTE_ID, 0);
+        if (noteId > 0){
+            isEdit = true;
+            editNote = databaseHelper.getUniqueNote(noteId);
+        } else {
+            isEdit = false;
+        }
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_save_note);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +159,12 @@ public class EditNoteActivity extends AppCompatActivity {
             for (int position = 0; position < semesterAdapter.getCount(); position++) {
                 if ((semesterAdapter.getItem(position)).getId() == editNote.getSemesterId()) {
                     spinner.setSelection(position);
+                }
+            }
+            FachAdapter fachAdapter = (FachAdapter) fachSpinner.getAdapter();
+            for (int position = 0; position < semesterAdapter.getCount(); position++) {
+                if ((fachAdapter.getItem(position)).getId() == editNote.getFachId()) {
+                    fachSpinner.setSelection(position);
                 }
             }
         }
