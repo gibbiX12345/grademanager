@@ -1,7 +1,5 @@
 package ch.bbcag.blugij.grademanager.sqlite.model;
 
-import java.sql.Timestamp;
-
 /**
  * Created by blugij on 24.05.2016.
  */

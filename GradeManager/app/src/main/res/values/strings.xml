@@ -3,6 +3,7 @@
     <string name="message_fill_all_fields">Einige Eingaben sind ungültig!</string>
     <string name="edit_entry">bearbeiten</string>
     <string name="no_elements">Keine Elemente gefunden…</string>
+    <string name="not_avaliable">&#8212;</string>
     <!-- Toast Strings-->
     <string name="toast_text_function_na">Diese Funktion ist nicht verfügbar!</string>
     <string name="toast_text_note_saved">Die Note wurde gespeichert.</string>

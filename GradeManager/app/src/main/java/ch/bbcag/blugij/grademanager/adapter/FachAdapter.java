@@ -62,16 +62,21 @@ public class FachAdapter extends ArrayAdapter<Fach> implements SpinnerAdapter {
             }
 
             DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+            double fachDurchschnitt = fach.getDurchschnitt(databaseHelper);
 
             TextView tvFirst = (TextView) convertView.findViewById(R.id.tvfirst);
             TextView tvSecond = (TextView) convertView.findViewById(R.id.tvsecond);
             TextView tvThird = (TextView) convertView.findViewById(R.id.tvthird);
 
             tvFirst.setText(fach.getBezeichnung());
-            tvSecond.setText(fach.getGewichtung() + "x");
-            tvThird.setText(fach.getDurchschnitt(databaseHelper) + "");
+            tvSecond.setText("");
+            if (fachDurchschnitt == 0.0){
+                tvThird.setText(getContext().getResources().getString(R.string.not_avaliable));
+            } else {
+                tvThird.setText(fachDurchschnitt + "");
+            }
 
-            if (fach.getDurchschnitt(databaseHelper) < 4.0){
+            if (fachDurchschnitt < 4.0 && fachDurchschnitt > 0.0){
                 tvThird.setTextColor(getContext().getResources().getColor(android.R.color.holo_red_dark));
             } else {
                 tvThird.setTextColor(getContext().getResources().getColor(R.color.black));
