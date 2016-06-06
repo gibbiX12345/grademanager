@@ -151,9 +151,7 @@ public class EditNoteActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 semester = (Semester) parent.getItemAtPosition(position);
-                if (fachSpinner.getSelectedItemPosition() < 0) {
-                    fachSpinner.setAdapter(new FachAdapter(getApplicationContext(), R.layout.custom_list_view_item_one_column, databaseHelper.getAllFachsBySemester(semester.getId()), true));
-                }
+                fachSpinner.setAdapter(new FachAdapter(getApplicationContext(), R.layout.custom_list_view_item_one_column, databaseHelper.getAllFachsBySemester(semester.getId()), true));
             }
 
             @Override
