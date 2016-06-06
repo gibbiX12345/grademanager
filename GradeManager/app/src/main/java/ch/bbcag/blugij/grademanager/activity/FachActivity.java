@@ -101,7 +101,9 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt(getString(R.string.current_fach_id), fach.getId());
                 editor.apply();
-
+                if (isFabOpen){
+                    animateFAB();
+                }
                 Intent intent = new Intent(getApplicationContext(), NoteActivity.class);
                 intent.putExtra(NoteActivity.INTENT_EXTRA_FACH_ID, fach.getId());
                 startActivity(intent);
@@ -161,7 +163,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         switch (id){
             case R.id.add_button:
                 animateFAB();
-                break;
+                return;
 
             case R.id.note_add_button:
                 if (databaseHelper.getAllFachs().isEmpty()){
@@ -176,6 +178,9 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentFach = new Intent(this, EditFachActivity.class);
                 startActivity(intentFach);
                 break;
+        }
+        if (isFabOpen){
+            animateFAB();
         }
     }
 
