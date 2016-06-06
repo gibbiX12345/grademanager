@@ -42,6 +42,7 @@
     <!-- Text in "content_edit_semester"  -->
     <string name="title_activity_edit_semester">Neues Semester</string>
     <string name="alert_title_same_bez">Achtung</string>
+    <string name="cbx_faecher_uebernehmen">Fächer übernehmen von:</string>
     <string name="alert_text_same_bez">Dieses Semester ist bereits vorhanden!</string>
     <!-- Text in "content_note"  -->
     <string name="label_semester">Semester:</string>
