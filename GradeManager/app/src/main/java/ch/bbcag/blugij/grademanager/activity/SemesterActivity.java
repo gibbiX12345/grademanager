@@ -184,8 +184,8 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                     break;
 
                 case R.id.semester_add_button:
-                    Intent intent = new Intent(this, EditSemesterActivity.class);
-                    startActivity(intent);
+                    Intent intentSemester = new Intent(this, EditSemesterActivity.class);
+                    startActivity(intentSemester);
                     break;
             }
     }
@@ -201,9 +201,9 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             fachAddButton.startAnimation(fab_close);
             semesterAddButton.startAnimation(fab_close);
 
-            noteAddButton.setClickable(false);
-            fachAddButton.setClickable(false);
-            semesterAddButton.setClickable(false);
+            noteAddButton.setEnabled(false);
+            fachAddButton.setEnabled(false);
+            semesterAddButton.setEnabled(false);
 
             isFabOpen = false;
 
@@ -215,9 +215,9 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             fachAddButton.startAnimation(fab_open);
             semesterAddButton.startAnimation(fab_open);
 
-            noteAddButton.setClickable(true);
-            fachAddButton.setClickable(true);
-            semesterAddButton.setClickable(true);
+            noteAddButton.setEnabled(true);
+            fachAddButton.setEnabled(true);
+            semesterAddButton.setEnabled(true);
 
             isFabOpen = true;
         }

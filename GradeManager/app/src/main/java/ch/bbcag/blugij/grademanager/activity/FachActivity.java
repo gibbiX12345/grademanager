@@ -215,8 +215,8 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
             noteAddButton.startAnimation(fab_close);
             fachAddButton.startAnimation(fab_close);
 
-            noteAddButton.setClickable(false);
-            fachAddButton.setClickable(false);
+            noteAddButton.setEnabled(false);
+            fachAddButton.setEnabled(false);
 
             isFabOpen = false;
 
@@ -227,8 +227,8 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
             noteAddButton.startAnimation(fab_open);
             fachAddButton.startAnimation(fab_open);
 
-            noteAddButton.setClickable(true);
-            fachAddButton.setClickable(true);
+            noteAddButton.setEnabled(true);
+            fachAddButton.setEnabled(true);
 
             isFabOpen = true;
         }
