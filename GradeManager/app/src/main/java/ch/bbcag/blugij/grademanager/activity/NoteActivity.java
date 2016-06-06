@@ -186,7 +186,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
             addButton.startAnimation(rotate_backward);
             noteAddButton.startAnimation(fab_close);
-            noteAddButton.setClickable(false);
+            noteAddButton.setEnabled(false);
 
             isFabOpen = false;
 
@@ -194,7 +194,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
             addButton.startAnimation(rotate_forward);
             noteAddButton.startAnimation(fab_open);
-            noteAddButton.setClickable(true);
+            noteAddButton.setEnabled(true);
 
             isFabOpen = true;
         }
