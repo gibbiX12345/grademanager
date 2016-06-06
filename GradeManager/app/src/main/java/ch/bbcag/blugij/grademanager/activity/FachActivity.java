@@ -168,6 +168,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.note_add_button:
                 if (databaseHelper.getAllFachs().isEmpty()){
                     UIHelper.toastFunctionNotAvailable(this);
+                    return;
                 } else {
                     Intent intentNote = new Intent(this, EditNoteActivity.class);
                     startActivity(intentNote);

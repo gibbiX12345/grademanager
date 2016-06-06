@@ -173,6 +173,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.note_add_button:
                     if (databaseHelper.getAllFachs().isEmpty()){
                         UIHelper.toastFunctionNotAvailable(this);
+                        return;
                     } else {
                         Intent intentNote = new Intent(this, EditNoteActivity.class);
                         startActivity(intentNote);
@@ -182,6 +183,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.fach_add_button:
                     if (databaseHelper.getAllSemesters().isEmpty()){
                         UIHelper.toastFunctionNotAvailable(this);
+                        return;
                     } else {
                         Intent intentFach = new Intent(this, EditFachActivity.class);
                         startActivity(intentFach);
