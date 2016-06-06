@@ -1,6 +1,7 @@
 package ch.bbcag.blugij.grademanager.activity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +18,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import ch.bbcag.blugij.grademanager.R;
 import ch.bbcag.blugij.grademanager.adapter.FachAdapter;
@@ -68,8 +72,10 @@ public class EditNoteActivity extends AppCompatActivity {
                     double gewichtung = Double.parseDouble(etGewichtung.getText().toString());
                     EditText etNote = (EditText) findViewById(R.id.edit_note_note_input);
                     double note = Double.parseDouble(etNote.getText().toString());
-                    DatePicker dpGeschriebenAm = (DatePicker) findViewById(R.id.edit_note_datepicker_datepicker);
-                    long geschriebenAm = getLongFromDatePicker(dpGeschriebenAm);
+                    /*DatePicker dpGeschriebenAm = (DatePicker) findViewById(R.id.edit_note_datepicker_datepicker);
+                    long geschriebenAm = getLongFromDatePicker(dpGeschriebenAm);*/
+                    EditText etDatepicker = (EditText) findViewById(R.id.edit_note_datepicker_datepicker);
+                    long geschriebenAm = new SimpleDateFormat("dd.MM.yyyy").parse(etDatepicker.getText().toString()).getTime();
                     EditText etBemerkung = (EditText) findViewById(R.id.edit_note_bemerkung_input);
                     String bemerkung = etBemerkung.getText().toString();
                     if(bezeichnung.equals("") || gewichtung <= 0 || note < 1 || geschriebenAm < 0 || semester == null || fach == null){
@@ -192,6 +198,51 @@ public class EditNoteActivity extends AppCompatActivity {
             }
         });
 
+        final Calendar myCalendar = Calendar.getInstance();
+
+
+        final EditText etDatepicker = (EditText) findViewById(R.id.edit_note_datepicker_datepicker);
+        etDatepicker.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel(etDatepicker, myCalendar);
+            }
+
+        };
+
+        etDatepicker.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(EditNoteActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        etDatepicker.setFocusable(true);
+        etDatepicker.setEnabled(true);
+        etDatepicker.setSingleLine(true);
+        etDatepicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    new DatePickerDialog(EditNoteActivity.this, date, myCalendar
+                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                            myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                }
+            }
+        });
+
 
         if (isEdit){
             EditText etBezeichnung = (EditText) findViewById(R.id.edit_note_et_bezeichnung_input);
@@ -200,8 +251,11 @@ public class EditNoteActivity extends AppCompatActivity {
             etGewichtung.setText(editNote.getGewichtung() + "");
             EditText etNote = (EditText) findViewById(R.id.edit_note_note_input);
             etNote.setText(editNote.getNote() + "");
-            DatePicker dpGeschriebenAm = (DatePicker) findViewById(R.id.edit_note_datepicker_datepicker);
-            setLongToDatePicker(dpGeschriebenAm, editNote.getGeschriebenAm());
+            /*DatePicker dpGeschriebenAm = (DatePicker) findViewById(R.id.edit_note_datepicker_datepicker);
+            setLongToDatePicker(dpGeschriebenAm, editNote.getGeschriebenAm());*/
+            Date geschriebenAm = new Date(editNote.getGeschriebenAm());
+            etDatepicker.setText(new SimpleDateFormat("dd.MM.yyyy").format(geschriebenAm));
+            myCalendar.setTime(geschriebenAm);
             EditText etBemerkung = (EditText) findViewById(R.id.edit_note_bemerkung_input);
             etBemerkung.setText(editNote.getBemerkung());
 
@@ -217,6 +271,14 @@ public class EditNoteActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void updateLabel(EditText etDatepicker, Calendar myCalendar) {
+
+        String myFormat = "dd.MM.yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.GERMAN);
+
+        etDatepicker.setText(sdf.format(myCalendar.getTime()));
     }
 
     public static long getLongFromDatePicker(DatePicker datePicker){

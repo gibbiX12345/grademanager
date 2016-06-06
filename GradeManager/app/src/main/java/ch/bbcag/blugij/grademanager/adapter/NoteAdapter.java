@@ -82,6 +82,11 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             tvFirst.setText(note.getBezeichnung());
             tvSecond.setText(note.getGewichtung() + "x");
             tvThird.setText(note.getNote() + "");
+            if (note.getNote() < 4.0){
+                tvThird.setTextColor(getContext().getResources().getColor(android.R.color.holo_red_dark));
+            } else {
+                tvThird.setTextColor(getContext().getResources().getColor(R.color.black));
+            }
             tvFourth.bringToFront();
             tvFourth.setText(new SimpleDateFormat("dd. MMM yyyy", Locale.GERMAN).format(new Date(note.getGeschriebenAm())));
         }

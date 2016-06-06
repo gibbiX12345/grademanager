@@ -70,6 +70,12 @@ public class FachAdapter extends ArrayAdapter<Fach> implements SpinnerAdapter {
             tvFirst.setText(fach.getBezeichnung());
             tvSecond.setText(fach.getGewichtung() + "x");
             tvThird.setText(fach.getDurchschnitt(databaseHelper) + "");
+
+            if (fach.getDurchschnitt(databaseHelper) < 4.0){
+                tvThird.setTextColor(getContext().getResources().getColor(android.R.color.holo_red_dark));
+            } else {
+                tvThird.setTextColor(getContext().getResources().getColor(R.color.black));
+            }
         }
 
         return convertView;

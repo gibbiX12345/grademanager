@@ -400,7 +400,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public List<Note> getAllNotesByFach(int fachId){
         List<Note> fachList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_NOTE + " WHERE " + KEY_N_FACH_ID + " = " + fachId;
+        String selectQuery = "SELECT * FROM " + TABLE_NOTE + " WHERE " + KEY_N_FACH_ID + " = " + fachId + " order by " + KEY_N_GESCHRIEBEN_AM + " desc";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
