@@ -109,7 +109,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.context_menu, menu);
+        inflater.inflate(R.menu.context_menu_semester, menu);
     }
 
     @Override
@@ -143,6 +143,13 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtra(EditSemesterActivity.INTENT_EXTRA_SEMESTER_ID, adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId());
                 startActivity(intent);
                 return true;
+            case R.id.item_duplicate:
+                int item_id = adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
+                Semester semester = databaseHelper.getUniqueSemester(item_id);
+                databaseHelper.duplicateSemester(semester, "Kopie von " + semester.getBezeichnung());
+                UIHelper.makeToast(SemesterActivity.this, getResources().getString(R.string.toast_text_semester_duplicated), Toast.LENGTH_LONG);
+                onResume();
+
             default:
 
                 return super.onContextItemSelected(item);

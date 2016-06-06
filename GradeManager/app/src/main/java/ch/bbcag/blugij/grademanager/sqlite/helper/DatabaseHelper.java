@@ -191,6 +191,17 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return Math.round((sumFach / gewichtungCount) * 10) / 10.0;
     }
 
+    public void duplicateSemester(Semester oldSemester, String newName){
+        Semester newSemester = new Semester(newName, 0.0);
+        int newId = createSemester(newSemester);
+        for(Fach fach : getAllFachsBySemester(oldSemester.getId())){
+            fach.setSemesterId(newId);
+            fach.setDurchschnitt(0.0);
+            fach.setId(0);
+            createFach(fach);
+        }
+    }
+
     //endregion
 
     //region Fach Table methods
