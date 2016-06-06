@@ -73,7 +73,6 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         fachAddButton.setOnLongClickListener(this);
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -85,11 +84,13 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         fachListView = (ListView) findViewById(R.id.fach_list_view);
         adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachsBySemester(semesterId), false);
         TextView textView = (TextView) findViewById(R.id.no_elements_found);
+
         if (adapter.isEmpty()){
             textView.setVisibility(View.VISIBLE);
         } else {
             textView.setVisibility(View.GONE);
         }
+
         fachListView.setAdapter(adapter);
         fachListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -140,16 +141,15 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         })
                         .show();
-
-
                 return true;
+
             case R.id.item_modify:
                 Intent intent = new Intent(this, EditFachActivity.class);
                 intent.putExtra(EditFachActivity.INTENT_EXTRA_FACH_ID, adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId());
                 startActivity(intent);
                 return true;
-            default:
 
+            default:
                 return super.onContextItemSelected(item);
         }
 
@@ -266,9 +266,8 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         })
                         .show();
-
-
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -76,11 +76,11 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         noteListView = (ListView) findViewById(R.id.note_list_view);
         adapter = new NoteAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllNotesByFach(semesterId), false);
-        TextView textView = (TextView) findViewById(R.id.no_elements_found);
+        TextView tvNoElements = (TextView) findViewById(R.id.no_elements_found);
         if (adapter.isEmpty()){
-            textView.setVisibility(View.VISIBLE);
+            tvNoElements.setVisibility(View.VISIBLE);
         } else {
-            textView.setVisibility(View.GONE);
+            tvNoElements.setVisibility(View.GONE);
         }
         noteListView.setAdapter(adapter);
 

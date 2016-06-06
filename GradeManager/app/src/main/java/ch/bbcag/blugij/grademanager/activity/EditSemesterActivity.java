@@ -35,6 +35,7 @@ public class EditSemesterActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(getApplicationContext());
         Intent intent = getIntent();
         int semesterId = intent.getIntExtra(INTENT_EXTRA_SEMESTER_ID, 0);
+
         if (semesterId > 0){
             isEdit = true;
             editSemester = databaseHelper.getUniqueSemester(semesterId);
