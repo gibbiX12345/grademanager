@@ -87,6 +87,9 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (isFabOpen){
+                    animateFAB();
+                }
                 Intent intent = new Intent(getApplicationContext(), DisplayNoteActivity.class);
                 Note note = (Note) parent.getItemAtPosition(position);
                 intent.putExtra(DisplayNoteActivity.INTENT_EXTRA_NOTE_ID, note.getId());
@@ -148,12 +151,15 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         switch (id){
             case R.id.add_button:
                 animateFAB();
-                break;
+                return;
 
             case R.id.note_add_button:
                 Intent intentNote = new Intent(this, EditNoteActivity.class);
                 startActivity(intentNote);
                 break;
+        }
+        if (isFabOpen){
+            animateFAB();
         }
     }
 

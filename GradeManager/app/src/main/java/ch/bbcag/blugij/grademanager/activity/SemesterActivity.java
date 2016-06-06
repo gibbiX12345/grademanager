@@ -20,6 +20,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,14 +96,18 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt(getString(R.string.current_semester_id), semester.getId());
                 editor.apply();
-
+                if (isFabOpen){
+                    animateFAB();
+                }
                 Intent intent = new Intent(getApplicationContext(), FachActivity.class);
                 intent.putExtra(FachActivity.INTENT_EXTRA_SEMESTER_ID, semester.getId());
                 startActivity(intent);
+
             }
         });
 
         registerForContextMenu(semesterListView);
+
     }
 
     @Override
@@ -163,7 +168,7 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             switch (id) {
                 case R.id.add_button:
                     animateFAB();
-                    break;
+                    return;
 
                 case R.id.note_add_button:
                     if (databaseHelper.getAllFachs().isEmpty()){
@@ -188,6 +193,9 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                     startActivity(intentSemester);
                     break;
             }
+        if (isFabOpen){
+            animateFAB();
+        }
     }
 
 
