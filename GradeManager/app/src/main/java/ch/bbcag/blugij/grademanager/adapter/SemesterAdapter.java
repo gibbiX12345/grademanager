@@ -65,21 +65,10 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
             TextView tvThird = (TextView) convertView.findViewById(R.id.tvthird);
 
             DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
-            double semesterDurchschnitt = semester.getDurchschnitt(databaseHelper);
 
             tvFirst.setText(semester.getBezeichnung());
             tvSecond.setText("");
-            if (semesterDurchschnitt == 0.0){
-                tvThird.setText(getContext().getResources().getString(R.string.not_avaliable));
-            } else {
-                tvThird.setText(semesterDurchschnitt + "");
-            }
-
-            if (semesterDurchschnitt < 4.0 && semesterDurchschnitt > 0.0){
-                tvThird.setTextColor(getContext().getResources().getColor(android.R.color.holo_red_dark));
-            } else {
-                tvThird.setTextColor(getContext().getResources().getColor(R.color.black));
-            }
+            tvThird.setText(semester.getDurchschnitt(databaseHelper) + "");
         }
 
         return convertView;

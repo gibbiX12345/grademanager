@@ -73,6 +73,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         fachAddButton.setOnLongClickListener(this);
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -84,13 +85,11 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         fachListView = (ListView) findViewById(R.id.fach_list_view);
         adapter = new FachAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllFachsBySemester(semesterId), false);
         TextView textView = (TextView) findViewById(R.id.no_elements_found);
-
         if (adapter.isEmpty()){
             textView.setVisibility(View.VISIBLE);
         } else {
             textView.setVisibility(View.GONE);
         }
-
         fachListView.setAdapter(adapter);
         fachListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -101,9 +100,7 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt(getString(R.string.current_fach_id), fach.getId());
                 editor.apply();
-                if (isFabOpen){
-                    animateFAB();
-                }
+
                 Intent intent = new Intent(getApplicationContext(), NoteActivity.class);
                 intent.putExtra(NoteActivity.INTENT_EXTRA_FACH_ID, fach.getId());
                 startActivity(intent);
@@ -143,15 +140,16 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         })
                         .show();
-                return true;
 
+
+                return true;
             case R.id.item_modify:
                 Intent intent = new Intent(this, EditFachActivity.class);
                 intent.putExtra(EditFachActivity.INTENT_EXTRA_FACH_ID, adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId());
                 startActivity(intent);
                 return true;
-
             default:
+
                 return super.onContextItemSelected(item);
         }
 
@@ -163,12 +161,11 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
         switch (id){
             case R.id.add_button:
                 animateFAB();
-                return;
+                break;
 
             case R.id.note_add_button:
                 if (databaseHelper.getAllFachs().isEmpty()){
                     UIHelper.toastFunctionNotAvailable(this);
-                    return;
                 } else {
                     Intent intentNote = new Intent(this, EditNoteActivity.class);
                     startActivity(intentNote);
@@ -179,9 +176,6 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentFach = new Intent(this, EditFachActivity.class);
                 startActivity(intentFach);
                 break;
-        }
-        if (isFabOpen){
-            animateFAB();
         }
     }
 
@@ -221,8 +215,8 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
             noteAddButton.startAnimation(fab_close);
             fachAddButton.startAnimation(fab_close);
 
-            noteAddButton.setEnabled(false);
-            fachAddButton.setEnabled(false);
+            noteAddButton.setClickable(false);
+            fachAddButton.setClickable(false);
 
             isFabOpen = false;
 
@@ -233,8 +227,8 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
             noteAddButton.startAnimation(fab_open);
             fachAddButton.startAnimation(fab_open);
 
-            noteAddButton.setEnabled(true);
-            fachAddButton.setEnabled(true);
+            noteAddButton.setClickable(true);
+            fachAddButton.setClickable(true);
 
             isFabOpen = true;
         }
@@ -272,8 +266,9 @@ public class FachActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         })
                         .show();
-                return true;
 
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

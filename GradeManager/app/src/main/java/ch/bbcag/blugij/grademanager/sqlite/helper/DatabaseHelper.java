@@ -191,17 +191,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return Math.round((sumFach / gewichtungCount) * 10) / 10.0;
     }
 
-    public void duplicateSemester(Semester oldSemester, String newName){
-        Semester newSemester = new Semester(newName, 0.0);
-        int newId = createSemester(newSemester);
-        for(Fach fach : getAllFachsBySemester(oldSemester.getId())){
-            fach.setSemesterId(newId);
-            fach.setDurchschnitt(0.0);
-            fach.setId(0);
-            createFach(fach);
-        }
-    }
-
     //endregion
 
     //region Fach Table methods
@@ -411,7 +400,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public List<Note> getAllNotesByFach(int fachId){
         List<Note> fachList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_NOTE + " WHERE " + KEY_N_FACH_ID + " = " + fachId + " order by " + KEY_N_GESCHRIEBEN_AM + " desc";
+        String selectQuery = "SELECT * FROM " + TABLE_NOTE + " WHERE " + KEY_N_FACH_ID + " = " + fachId;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);

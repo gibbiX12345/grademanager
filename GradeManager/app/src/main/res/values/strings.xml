@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">GradeManager</string>
-    <string name="message_fill_all_fields">Einige Eingaben sind ungültig!</string>
+    <string name="message_fill_all_fields">Einige Eingaben sind üngültig!</string>
     <string name="edit_entry">bearbeiten</string>
     <string name="no_elements">Keine Elemente gefunden…</string>
-    <string name="not_avaliable">&#8212;</string>
     <!-- Toast Strings-->
     <string name="toast_text_function_na">Diese Funktion ist nicht verfügbar!</string>
     <string name="toast_text_note_saved">Die Note wurde gespeichert.</string>
@@ -13,7 +12,6 @@
     <string name="toast_text_fach_deleted">Das Fach wurde mit sämtlichen Inhalten gelöscht.</string>
     <string name="toast_text_note_deleted">Die Note wurde gelöscht.</string>
     <string name="toast_text_everything_deleted">Sämtliche Daten wurden gelöscht.</string>
-    <string name="toast_text_semester_duplicated">Das Semester wurde dupliziert und gespeichert.</string>
     <!-- Text for Toolbar-Icons -->
     <string name="search_button">Suchen</string>
     <string name="settings_button">Einstellungen</string>
@@ -43,7 +41,6 @@
     <!-- Text in "content_edit_semester"  -->
     <string name="title_activity_edit_semester">Neues Semester</string>
     <string name="alert_title_same_bez">Achtung</string>
-    <string name="cbx_faecher_uebernehmen">Fächer übernehmen von:</string>
     <string name="alert_text_same_bez">Dieses Semester ist bereits vorhanden!</string>
     <!-- Text in "content_note"  -->
     <string name="label_semester">Semester:</string>
@@ -61,6 +58,5 @@
     <!-- Context menu-->
     <string name="item_delete_text">Löschen</string>
     <string name="item_modify_text">Bearbeiten</string>
-    <string name="item_dupblicate_text">Duplizieren</string>
 
 </resources>

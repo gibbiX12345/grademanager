@@ -16,11 +16,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -96,25 +95,21 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt(getString(R.string.current_semester_id), semester.getId());
                 editor.apply();
-                if (isFabOpen){
-                    animateFAB();
-                }
+
                 Intent intent = new Intent(getApplicationContext(), FachActivity.class);
                 intent.putExtra(FachActivity.INTENT_EXTRA_SEMESTER_ID, semester.getId());
                 startActivity(intent);
-
             }
         });
 
         registerForContextMenu(semesterListView);
-
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.context_menu_semester, menu);
+        inflater.inflate(R.menu.context_menu, menu);
     }
 
     @Override
@@ -148,13 +143,6 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtra(EditSemesterActivity.INTENT_EXTRA_SEMESTER_ID, adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId());
                 startActivity(intent);
                 return true;
-            case R.id.item_duplicate:
-                int item_id = adapter.getItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position).getId();
-                Semester semester = databaseHelper.getUniqueSemester(item_id);
-                databaseHelper.duplicateSemester(semester, "Kopie von " + semester.getBezeichnung());
-                UIHelper.makeToast(SemesterActivity.this, getResources().getString(R.string.toast_text_semester_duplicated), Toast.LENGTH_LONG);
-                onResume();
-
             default:
 
                 return super.onContextItemSelected(item);
@@ -168,12 +156,11 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             switch (id) {
                 case R.id.add_button:
                     animateFAB();
-                    return;
+                    break;
 
                 case R.id.note_add_button:
                     if (databaseHelper.getAllFachs().isEmpty()){
                         UIHelper.toastFunctionNotAvailable(this);
-                        return;
                     } else {
                         Intent intentNote = new Intent(this, EditNoteActivity.class);
                         startActivity(intentNote);
@@ -183,7 +170,6 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.fach_add_button:
                     if (databaseHelper.getAllSemesters().isEmpty()){
                         UIHelper.toastFunctionNotAvailable(this);
-                        return;
                     } else {
                         Intent intentFach = new Intent(this, EditFachActivity.class);
                         startActivity(intentFach);
@@ -191,13 +177,10 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
                     break;
 
                 case R.id.semester_add_button:
-                    Intent intentSemester = new Intent(this, EditSemesterActivity.class);
-                    startActivity(intentSemester);
+                    Intent intent = new Intent(this, EditSemesterActivity.class);
+                    startActivity(intent);
                     break;
             }
-        if (isFabOpen){
-            animateFAB();
-        }
     }
 
 
@@ -211,9 +194,9 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             fachAddButton.startAnimation(fab_close);
             semesterAddButton.startAnimation(fab_close);
 
-            noteAddButton.setEnabled(false);
-            fachAddButton.setEnabled(false);
-            semesterAddButton.setEnabled(false);
+            noteAddButton.setClickable(false);
+            fachAddButton.setClickable(false);
+            semesterAddButton.setClickable(false);
 
             isFabOpen = false;
 
@@ -225,9 +208,9 @@ public class SemesterActivity extends AppCompatActivity implements View.OnClickL
             fachAddButton.startAnimation(fab_open);
             semesterAddButton.startAnimation(fab_open);
 
-            noteAddButton.setEnabled(true);
-            fachAddButton.setEnabled(true);
-            semesterAddButton.setEnabled(true);
+            noteAddButton.setClickable(true);
+            fachAddButton.setClickable(true);
+            semesterAddButton.setClickable(true);
 
             isFabOpen = true;
         }

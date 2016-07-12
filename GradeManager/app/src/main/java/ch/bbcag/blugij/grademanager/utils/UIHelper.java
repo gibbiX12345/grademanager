@@ -3,6 +3,9 @@ package ch.bbcag.blugij.grademanager.utils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.view.View;
 import android.widget.Toast;
 
 import ch.bbcag.blugij.grademanager.R;

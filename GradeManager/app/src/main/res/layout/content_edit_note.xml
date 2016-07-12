@@ -157,18 +157,12 @@
         android:layout_below="@id/edit_note_fach_spinner"
         />
 
-    <EditText
+    <DatePicker
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_note_datepicker_datepicker"
         android:visibility="visible"
-        android:inputType="textMultiLine"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_input_default"
-        android:shadowColor="@color/black"
-        android:hint=""
         android:layout_below="@id/edit_note_datepicker"
-        android:enabled="false"
         />
 
     <TextView

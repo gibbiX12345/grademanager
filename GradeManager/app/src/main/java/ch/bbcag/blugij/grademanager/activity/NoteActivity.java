@@ -76,20 +76,17 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         noteListView = (ListView) findViewById(R.id.note_list_view);
         adapter = new NoteAdapter(this, R.layout.custom_list_view_item, databaseHelper.getAllNotesByFach(semesterId), false);
-        TextView tvNoElements = (TextView) findViewById(R.id.no_elements_found);
+        TextView textView = (TextView) findViewById(R.id.no_elements_found);
         if (adapter.isEmpty()){
-            tvNoElements.setVisibility(View.VISIBLE);
+            textView.setVisibility(View.VISIBLE);
         } else {
-            tvNoElements.setVisibility(View.GONE);
+            textView.setVisibility(View.GONE);
         }
         noteListView.setAdapter(adapter);
 
         noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (isFabOpen){
-                    animateFAB();
-                }
                 Intent intent = new Intent(getApplicationContext(), DisplayNoteActivity.class);
                 Note note = (Note) parent.getItemAtPosition(position);
                 intent.putExtra(DisplayNoteActivity.INTENT_EXTRA_NOTE_ID, note.getId());
@@ -151,15 +148,12 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         switch (id){
             case R.id.add_button:
                 animateFAB();
-                return;
+                break;
 
             case R.id.note_add_button:
                 Intent intentNote = new Intent(this, EditNoteActivity.class);
                 startActivity(intentNote);
                 break;
-        }
-        if (isFabOpen){
-            animateFAB();
         }
     }
 
@@ -192,7 +186,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
             addButton.startAnimation(rotate_backward);
             noteAddButton.startAnimation(fab_close);
-            noteAddButton.setEnabled(false);
+            noteAddButton.setClickable(false);
 
             isFabOpen = false;
 
@@ -200,7 +194,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
             addButton.startAnimation(rotate_forward);
             noteAddButton.startAnimation(fab_open);
-            noteAddButton.setEnabled(true);
+            noteAddButton.setClickable(true);
 
             isFabOpen = true;
         }
